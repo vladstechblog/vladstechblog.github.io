@@ -1,0 +1,172 @@
+Last login: Tue Jul 15 11:29:00 on ttys001
+mcn00b@mcn00bs-MacBook-Air ~ % ls
+Applications		Documents		Music
+blog			Downloads		notes
+Brave-Browser.dmg	goals			Pictures
+captures		ISOs			Public
+code			jobs			python
+containers		Library			workspaces
+Desktop			Movies
+mcn00b@mcn00bs-MacBook-Air ~ % cd ISOs 
+mcn00b@mcn00bs-MacBook-Air ISOs % ls
+debian
+mcn00b@mcn00bs-MacBook-Air ISOs % cd debian 
+mcn00b@mcn00bs-MacBook-Air debian % ls
+debian-12.11.0-amd64-DVD-1.iso	SHA256SUMS.txt
+SHA256SUMS.sign.txt
+mcn00b@mcn00bs-MacBook-Air debian % realpath debian-12.11.0-amd64-DVD-1.iso 
+/Users/mcn00b/ISOs/debian/debian-12.11.0-amd64-DVD-1.iso
+mcn00b@mcn00bs-MacBook-Air debian % cd 
+mcn00b@mcn00bs-MacBook-Air ~ % mkdir ~/iso_test/debian 
+mkdir: /Users/mcn00b/iso_test: No such file or directory
+mcn00b@mcn00bs-MacBook-Air ~ % mkdir -p ~/iso_test/debian
+mcn00b@mcn00bs-MacBook-Air ~ % man curl
+mcn00b@mcn00bs-MacBook-Air ~ % curl --output-dir ~/iso_test/debian https://cdimage.debian.org/debian-cd/current/amd64/iso-dvd/SHA256SUMS
+
+be966aa53a436b3cfb96446d000e6c145a188e6df3dede4e2741161423aa4221  debian-12.11.0-amd64-DVD-1.iso
+0c5bc5c3e4783caa5435b442715eb9944aef6998cc87fc40e1e7c00e92ad8ef2  debian-12.11.0-amd64-DVD-10.iso
+11542bb64521ef3c99337db99cc1c6d35b89c76d06df2441bdd008a6b798ce2a  debian-12.11.0-amd64-DVD-11.iso
+ccdcc38d2c1c426116086ac77d8ced1b7bb04b9e1c364f1f1bc3cdffb8081290  debian-12.11.0-amd64-DVD-12.iso
+c7f3667b877501512e1ca856fb106fee55beecaab4586120130a5fcb5cd6cf3d  debian-12.11.0-amd64-DVD-13.iso
+e365cb84218c0f2e333dc2ea43bb51176e0204fe145bc1122050a4cb2353720d  debian-12.11.0-amd64-DVD-14.iso
+342bd1f2ce5570a0f18096192ca5cbdfb0b33a6302467e142722785c2cc2fad8  debian-12.11.0-amd64-DVD-15.iso
+4c5fa2bab0c22e1f2d15df96775fc91bb9302b9597ca537d90514e86d891033f  debian-12.11.0-amd64-DVD-16.iso
+72e4526e67e1fec60db415ea3a6f13bff83bc1a852a9297c676ceb3c1a5de1ac  debian-12.11.0-amd64-DVD-17.iso
+fbbabe5d4207051b9d5adcea4592c721288ee573d41895404bcd4546517cfc73  debian-12.11.0-amd64-DVD-18.iso
+07223a64b553cfde949823f506a720f61637634d74716628893756168de9a173  debian-12.11.0-amd64-DVD-19.iso
+62baba085ae9fcf5424aff4f5ec8c3539d8a75d4f4a9d55ae7c652bec7398b74  debian-12.11.0-amd64-DVD-2.iso
+ea525e6a651dec189578a76f9eef630517a08b59d4a1b9493166bf5b66dd9056  debian-12.11.0-amd64-DVD-20.iso
+6b85adadaf604affec9122a339da854e791fd5e4bfc91608b5dc40d0eea435a0  debian-12.11.0-amd64-DVD-21.iso
+16ead2000b3fb9f6d4f477184e24fc1a38ac4aa09448716d916aea579c385482  debian-12.11.0-amd64-DVD-22.iso
+477d687fa7529518cf3e4773109aba512b4d280e51d94b000ccc1b747f77e935  debian-12.11.0-amd64-DVD-3.iso
+289bf7c818b04dd88d157246236a6bffe7b32c1a7807d54ea7a26f099aa0117f  debian-12.11.0-amd64-DVD-4.iso
+9a50c5fdcd26265f55d62c1806068de2e5123917d7e593001f8cab055c21abb7  debian-12.11.0-amd64-DVD-5.iso
+6ad73bb1794997eb0489e92a7b828537968a5576e78fe4d7c06573d9d3812b4c  debian-12.11.0-amd64-DVD-6.iso
+272bc88ae97ce402e442758390732fc2bae6cf835efca229782c7253da30a30a  debian-12.11.0-amd64-DVD-7.iso
+cc6e738cf2b4fcce1d1d3ce0fb8b36729370d4deecff6a4dae7c5f1aff5bface  debian-12.11.0-amd64-DVD-8.iso
+8f5414732fbf4f14e561bb3d70d4ffe9abea4f1210c14130005cd7154775eca5  debian-12.11.0-amd64-DVD-9.iso
+mcn00b@mcn00bs-MacBook-Air ~ % ls ~/test_iso/debian
+ls: /Users/mcn00b/test_iso/debian: No such file or directory
+mcn00b@mcn00bs-MacBook-Air ~ % ls ~/iso_test/debian
+mcn00b@mcn00bs-MacBook-Air ~ % man curl
+mcn00b@mcn00bs-MacBook-Air ~ % curl --help         
+Usage: curl [options...] <url>
+ -d, --data <data>           HTTP POST data
+ -f, --fail                  Fail fast with no output on HTTP errors
+ -h, --help <category>       Get help for commands
+ -i, --include               Include response headers in output
+ -o, --output <file>         Write to file instead of stdout
+ -O, --remote-name           Write output to file named as remote file
+ -s, --silent                Silent mode
+ -T, --upload-file <file>    Transfer local FILE to destination
+ -u, --user <user:password>  Server user and password
+ -A, --user-agent <name>     Send User-Agent <name> to server
+ -v, --verbose               Make the operation more talkative
+ -V, --version               Show version number and quit
+
+This is not the full help, this menu is stripped into categories.
+Use "--help category" to get an overview of all categories.
+For all options use the manual or "--help all".
+mcn00b@mcn00bs-MacBook-Air ~ % curl -O --output-dir ~/iso_test/debian https://cdimage.debian.org/debian-cd/current/amd64/iso-dvd/SHA256SUMS
+
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100  2147  100  2147    0     0   3895      0 --:--:-- --:--:-- --:--:--  3889
+mcn00b@mcn00bs-MacBook-Air ~ % podman ps
+Cannot connect to Podman. Please verify your connection to the Linux system using `podman system connection list`, or try `podman machine init` and `podman machine start` to manage a new Linux VM
+Error: unable to connect to Podman socket: failed to connect: dial tcp 127.0.0.1:49778: connect: connection refused
+mcn00b@mcn00bs-MacBook-Air ~ % podman machine start devvm
+Starting machine "devvm"
+
+This machine is currently configured in rootless mode. If your containers
+require root permissions (e.g. ports < 1024), or if you run into compatibility
+issues with non-podman clients, you can switch using the following command:
+
+	podman machine set --rootful devvm
+
+API forwarding listening on: /var/folders/6k/kj0b5dzn54x3mtg8mymhr52m0000gn/T/podman/devvm-api.sock
+
+The system helper service is not installed; the default Docker API socket
+address can't be used by podman. If you would like to install it, run the following commands:
+
+        sudo /opt/podman/bin/podman-mac-helper install
+        podman machine stop devvm; podman machine start devvm
+
+You can still connect Docker API clients by setting DOCKER_HOST using the
+following command in your terminal session:
+
+        export DOCKER_HOST='unix:///var/folders/6k/kj0b5dzn54x3mtg8mymhr52m0000gn/T/podman/devvm-api.sock'
+
+Machine "devvm" started successfully
+mcn00b@mcn00bs-MacBook-Air ~ % podman ps
+CONTAINER ID  IMAGE       COMMAND     CREATED     STATUS      PORTS       NAMES
+mcn00b@mcn00bs-MacBook-Air ~ % podman run --rm -ti --name debian -v $HOME/ISOs/debian:/dvd docker.io/library/rockylinux:9.3               
+[root@c8a5fc955513 /]# exit
+exit
+mcn00b@mcn00bs-MacBook-Air ~ % podman run --rm -ti --name debian -v $HOME/ISOs/debian:/dvd docker.io/library/rockylinux:9.3
+[root@289552ef925c /]# grep nobody /etc/passwd
+nobody:x:65534:65534:Kernel Overflow User:/:/sbin/nologin
+[root@289552ef925c /]# exit
+exit
+mcn00b@mcn00bs-MacBook-Air ~ % podman run --rm -ti --name debian --user 65534:65534 -v $HOME/ISOs/debian:/dvd docker.io/library/rockylinux:9.3 
+bash-5.1$ exit
+exit
+mcn00b@mcn00bs-MacBook-Air ~ % podman run --rm -ti --name debian --user 65534:65534 -v $HOME/iso_test/debian:/dvd docker.io/library/rockylinux:9.3 
+bash-5.1$ cd /dvd/
+bash-5.1$ ls
+SHA256SUMS  SHA256SUMS.sign  debian-12.11.0-amd64-DVD-1.iso
+bash-5.1$ gpg --verify SHA256SUMS.sign 
+gpg: Fatal: can't create directory '//.gnupg': Permission denied
+bash-5.1$ echo $HOME
+/
+bash-5.1$ pwd
+/dvd
+bash-5.1$ ls /home/
+bash-5.1$ ls
+SHA256SUMS  SHA256SUMS.sign  debian-12.11.0-amd64-DVD-1.iso
+bash-5.1$ exit 
+exit
+mcn00b@mcn00bs-MacBook-Air ~ % podman run --rm -ti --name debian -v $HOME/ISOs/debian:/dvd docker.io/library/rockylinux:9.3     
+[root@d01ebb7838ec /]# cd /d
+bash: cd: /d: No such file or directory
+[root@d01ebb7838ec /]# cd /dvd/
+[root@d01ebb7838ec dvd]# ls
+SHA256SUMS.sign.txt  SHA256SUMS.txt  debian-12.11.0-amd64-DVD-1.iso
+[root@d01ebb7838ec dvd]# exit
+exit
+mcn00b@mcn00bs-MacBook-Air ~ % podman run --rm -ti --name debian -v $HOME/iso_test/debian:/dvd docker.io/library/rockylinux:9.3  
+[root@7ecda54182d5 /]# cd /dvd/
+[root@7ecda54182d5 dvd]# ls
+SHA256SUMS  SHA256SUMS.sign  debian-12.11.0-amd64-DVD-1.iso
+[root@7ecda54182d5 dvd]# gpg --verify SHA256SUMS.sign 
+gpg: directory '/root/.gnupg' created
+gpg: keybox '/root/.gnupg/pubring.kbx' created
+gpg: assuming signed data in 'SHA256SUMS'
+gpg: Signature made Sat May 17 17:55:59 2025 UTC
+gpg:                using RSA key DF9B9C49EAA9298432589D76DA87E80D6294BE9B
+gpg: Can't check signature: No public key
+[root@7ecda54182d5 dvd]# $ gpg --keyserver hkps://keyring.debian.org:443 --recv-keys 0x2404C9546E145360
+bash: $: command not found
+[root@7ecda54182d5 dvd]# gpg --keyserver hkps://keyring.debian.org:443 --recv-keys 0x2404C9546E145360
+gpg: /root/.gnupg/trustdb.gpg: trustdb created
+gpg: key 2404C9546E145360: public key "Gunnar Eyal Wolf Iszaevich <gwolf@iiec.unam.mx>" imported
+gpg: Total number processed: 1
+gpg:               imported: 1
+[root@7ecda54182d5 dvd]# gpg --verify SHA256SUMS.sign 
+gpg: assuming signed data in 'SHA256SUMS'
+gpg: Signature made Sat May 17 17:55:59 2025 UTC
+gpg:                using RSA key DF9B9C49EAA9298432589D76DA87E80D6294BE9B
+gpg: Can't check signature: No public key
+[root@7ecda54182d5 dvd]# gpg --keyserver hkps://keyring.debian.org:443 --recv-keys 0xDA87E80D6294BE9B
+gpg: key DA87E80D6294BE9B: public key "Debian CD signing key <debian-cd@lists.debian.org>" imported
+gpg: Total number processed: 1
+gpg:               imported: 1
+[root@7ecda54182d5 dvd]# gpg --verify SHA256SUMS.sign 
+gpg: assuming signed data in 'SHA256SUMS'
+gpg: Signature made Sat May 17 17:55:59 2025 UTC
+gpg:                using RSA key DF9B9C49EAA9298432589D76DA87E80D6294BE9B
+gpg: Good signature from "Debian CD signing key <debian-cd@lists.debian.org>" [unknown]
+gpg: WARNING: This key is not certified with a trusted signature!
+gpg:          There is no indication that the signature belongs to the owner.
+Primary key fingerprint: DF9B 9C49 EAA9 2984 3258  9D76 DA87 E80D 6294 BE9B
+[root@7ecda54182d5 dvd]# 
