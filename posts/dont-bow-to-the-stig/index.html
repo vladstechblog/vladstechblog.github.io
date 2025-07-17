@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=8080&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>Don&#39;t Bow to the STIG. Scrutinize It! | Vlads Tech</title>
+
+    <link rel="stylesheet" href="/css/main.css">
+
+
+      <script src="/js/main.js"></script>
+
+
+</head>
+<body>
+  <header>
+    <div class="h1-logo">
+    <img src="/white_logo.svg"/>
+</div>
+
+<nav class="main-nav">
+    <a href="/">HOME</a>
+    <a href="/about">About</a>
+    <a href="/posts">Tech Posts</a>
+</nav>
+
+
+
+  </header>
+  <main>
+    
+  <h1>Don&#39;t Bow to the STIG. Scrutinize It!</h1>
+
+  
+  
+  <time datetime="2024-05-08T00:00:00&#43;00:00">May 8, 2024</time>
+
+  <p><strong>Disclaimer: All views are my own and do not represent anyone else.</strong></p>
+<h2 id="introduction">Introduction</h2>
+<p>If you or your friends have done any DoD related IT work, then you probably
+came across the term Security Technical Implementation Guides or STIGs.
+STIGs are hardening guidelines that cover a wide range of topics such as
+operating system, software development, containerization,
+network equipment configuration, web browsers and more.</p>
+<p>The &ldquo;application&rdquo; of STIGs normally takes a form of a checklist that is
+followed by IT/cyber security personnel.  Those checklists have applicable
+configuration items, denoted by vulnerability or rule IDs. Each of those
+STIG items corresponds to a &ldquo;security setting&rdquo; that must be applied to
+the underlying system in order for it to be &ldquo;compliant&rdquo;.</p>
+<p>Most of the time the sys admins or cyber folks applying the STIG settings
+do a fine job of copy/pasting with some sprinkles of automation, without
+really digesting the content of the actions prescribed by the STIGs.</p>
+<h2 id="proving-the-point">Proving the Point</h2>
+<p>There is a very disturbing trend in the DoD to take STIGs as the ultimate
+source of truth, without understanding of what the prescribed solutions
+actually do. It is very common to hear, &ldquo;Oh, I did it because it&rsquo;s
+in the STIGs.&rdquo;</p>
+<p>However, it would be prudent to remember that STIGs are a DoD product,
+(think of the typical government work quality) and as such, if anything,
+deserve extra scrutiny.</p>
+<p>Here is a great example of what I&rsquo;m talking about that is present in
+the current (as of this writing) RHEL8 STIG released on 30 April 2024.</p>
+<p>The item in question is denoted by Vul ID: V-230229.</p>
+<p>The &ldquo;Check Text&rdquo; (as confusing as it is) has the following line:</p>
+<blockquote>
+<p>If the root ca file is not a DoD-issued certificate with a valid date
+and installed in the /etc/sssd/pki/sssd_auth_ca_db.pem location,
+this is a finding.&quot;</p></blockquote>
+<p>and displays the output from the <code>openssl x509</code> command listed a few lines
+earlier. See image below.</p>
+<p><img src="vid-230229.png" alt="vid-230229"></p>
+<p>The STIG authors seem to suggest that the certificate validation should be
+performed based on the content of the certificate subject field
+as well as validity timestamps. A prudent sys admin or cyber person would
+immediately ask the following question: I wonder if someone can generate
+a self-signed TLS CA cert with those exact values?</p>
+<p>The only way to find out is to try.</p>
+<p>The following directory structure is assumed for testing:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>|--demoCA
+</span></span><span style="display:flex;"><span>    |-- index.txt
+</span></span><span style="display:flex;"><span>    |-- newcerts
+</span></span><span style="display:flex;"><span>    |-- serial
+</span></span><span style="display:flex;"><span>|--fakeca.csr &lt;<span style="color:#f92672">==</span> will be generated
+</span></span><span style="display:flex;"><span>|-- fakeca.pem &lt;<span style="color:#f92672">==</span> will be generated
+</span></span><span style="display:flex;"><span>|-- privkey.pem &lt;<span style="color:#f92672">==</span> will be generated
+</span></span></code></pre></div><p>The base skeleton setup can be created with the following commands:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ mkdir -p demoCA/newcerts
+</span></span><span style="display:flex;"><span>$ touch demoCA/index.txt
+</span></span><span style="display:flex;"><span>$ echo <span style="color:#ae81ff">0001</span> &gt; demoCA/serial
+</span></span></code></pre></div><p>Let&rsquo;s start by generating a private TLS key and a Certificate Signing Request
+(CSR) with the desired subject fields:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ openssl req -new -newkey rsa:4095 -nodes -keyout privkey.pem -out fakeca.csr -batch -subj <span style="color:#e6db74">&#34;/C=US/O=U.S. Government/OU=DoD/OU=PKI/CN=DoD Root CA 3&#34;</span> -addext <span style="color:#e6db74">&#34;basicConstraints=critical,CA:TRUE&#34;</span>
+</span></span></code></pre></div><p>Let&rsquo;s verify that the subject contains correct values by running the following:</p>
+<pre tabindex="0"><code>$ openssl req -noout -in fakeca.csr -subject 
+</code></pre><p><img src="check-subject-fields.png" alt="check-subject-fields"></p>
+<p>Let&rsquo;s sign the CSR while adding desired dates and double-checking
+the subject fields one more time before approving the newly-minted CA.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ openssl ca -in fakeca.csr -keyfile privkey.pem -extensions v3_ca -selfsign -policy policy_anything -out demoCA/newcerts/newcert.pem -startdate 20120320184641Z -enddate 20291230184641Z
+</span></span></code></pre></div><p><img src="sign-the-cert.png" alt="sign-the-cert"></p>
+<p>Finally let&rsquo;s compare our newly-minted CA&rsquo;s subject and timestamp values
+against the ones listed in the STIG check field.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>openssl x509 -noout -text -in demoCA/newcerts/newcert.pem 
+</span></span></code></pre></div><p>It appears that our newly-minted CA would pass the Check Text criteria
+cited earlier. Cheers!</p>
+<p><img src="check-our-work.png" alt="check-our-work"></p>
+<p><strong>A forged PKI CA certificate and a passed STIG check.  Score!!!</strong></p>
+<h2 id="not-everything-is-lost-if-one-exercises-due-diligence">Not Everything is Lost if One Exercises Due Diligence</h2>
+<p>Thankfully, not all is lost if the DoD sys admins and cyber folks don&rsquo;t blindly
+follow what the STIGs say. As it turns out there is a better way to validate
+the CA certs, and the DoD actually publishes it. Of course this method is
+buried in the endless piles of the US government-issued memos.
+However, with a little bit of web searching a patience,
+one will eventually stumble across the official DoD memo containing
+the SHA1 fingerprint (aka DoD Approved External PKI Master Document)
+of the certificate in question.</p>
+<p>See image below:</p>
+<p><img src="cert-in-the-memo.png" alt="cert-fingerpirnt-in-dod-memo"></p>
+<p>Now, all the sys admin has to do is to generate the SHA1 fingerprint
+of the cert installed on the system and compare it to the one
+published in the official memo.</p>
+<p>The cert fingerprint can be generated as follows:</p>
+<pre tabindex="0"><code>$ openssl x509 -fingerprint -in /path/to/cert
+</code></pre><p><img src="fingerprint-generated.png" alt="generated-CA-fingerprint"></p>
+<p>Here is what the result should look like:</p>
+<p><img src="fingerpirnt-comparison.png" alt="fingeprint-comparison"></p>
+<h2 id="lessons-learned">Lessons Learned</h2>
+<p>STIGs are a government product written by humans and are therefore
+bound to contain errors and oversights. While there are some brilliant
+folks working in the government, doing good cybersecurity work, they are
+probably not the ones writing STIGs. Something to keep in mind as
+you apply them.</p>
+<h3 id="resources">Resources</h3>
+<ul>
+<li>
+<p><a href="https://public.cyber.mil/stigs/downloads/?_dl_facet_stigs=stig-viewing">DISA STIG Viewing</a></p>
+</li>
+<li>
+<p><a href="https://public.cyber.mil/stigs/compilations/">STIG Library</a></p>
+</li>
+<li>
+<p><a href="https://dl.dod.cyber.mil/wp-content/uploads/pki-pke/pdf/unclass-dod_approved_external_pkis_master_document.pdf">Memo Containing CA Cert Fingerprints</a></p>
+</li>
+</ul>
+
+  
+  <div>
+    <div>Tags:</div>
+    <ul>
+        <li><a href="/tags/cybersecurity/">Cybersecurity</a></li>
+        <li><a href="/tags/stig/">Stig</a></li>
+        <li><a href="/tags/system-hardening/">System Hardening</a></li>
+    </ul>
+  </div>
+
+
+  </main>
+  <footer>
+    <p>Copyright 2025. All rights reserved.</p>
+
+  </footer>
+</body>
+</html>

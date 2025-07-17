@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Dad-Jokes on Vlads Tech</title>
+    <link>//localhost:8080/dad-jokes/</link>
+    <description>Recent content in Dad-Jokes on Vlads Tech</description>
+    <generator>Hugo</generator>
+    <language>en-US</language>
+    <lastBuildDate>Tue, 17 Jun 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="//localhost:8080/dad-jokes/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>TDD: Brief Notes</title>
+      <link>//localhost:8080/dad-jokes/dad-joke-originals/</link>
+      <pubDate>Tue, 17 Jun 2025 00:00:00 +0000</pubDate>
+      <guid>//localhost:8080/dad-jokes/dad-joke-originals/</guid>
+      <description>&lt;p&gt;What do you do when you dopper a dad joke on a freeway?&#xA;Keep driving on&amp;hellip; Somebody will get it&amp;hellip;&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

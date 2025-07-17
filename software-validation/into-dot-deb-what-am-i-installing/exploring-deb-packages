@@ -1,0 +1,36 @@
++++
+title =  "Into .deb: What am I installing?"
+date = 2025-06-17
+draft = false
+series = "devops"
+tags =  ['devops', 'software validation']
++++
+
+## Into
+
+So there I was trying to install n
+
+nobody wants to blindly install thing on their system
+
+it may be a reasonable idea to take a look at what's being installed first
+
+
+
+## .deb package Structure
+
+.deb packates are `ar` archives which contain 3 parts
+
+- `debian-binary`: a text file containing version of .deb package format
+- `control.tar.xz`: checksums and package metadata
+- `data.tar.xz`: actual things which will be installed on the system
+
+
+## Links
+
+https://developer.nvidia.com/blog/updating-the-cuda-linux-gpg-repository-key/
+
+
+
+## TODOs: screenshots
+
+## 

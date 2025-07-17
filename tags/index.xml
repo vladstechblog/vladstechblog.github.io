@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on Vlads Tech</title>
+    <link>//localhost:8080/tags/</link>
+    <description>Recent content in Tags on Vlads Tech</description>
+    <generator>Hugo</generator>
+    <language>en-US</language>
+    <lastBuildDate>Tue, 15 Jul 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="//localhost:8080/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Macdventure</title>
+      <link>//localhost:8080/tags/macdventure/</link>
+      <pubDate>Tue, 15 Jul 2025 00:00:00 +0000</pubDate>
+      <guid>//localhost:8080/tags/macdventure/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Coding</title>
+      <link>//localhost:8080/tags/coding/</link>
+      <pubDate>Tue, 17 Jun 2025 00:00:00 +0000</pubDate>
+      <guid>//localhost:8080/tags/coding/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Humor</title>
+      <link>//localhost:8080/tags/humor/</link>
+      <pubDate>Tue, 17 Jun 2025 00:00:00 +0000</pubDate>
+      <guid>//localhost:8080/tags/humor/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Tdd</title>
+      <link>//localhost:8080/tags/tdd/</link>
+      <pubDate>Tue, 17 Jun 2025 00:00:00 +0000</pubDate>
+      <guid>//localhost:8080/tags/tdd/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Cybersecurity</title>
+      <link>//localhost:8080/tags/cybersecurity/</link>
+      <pubDate>Wed, 08 May 2024 00:00:00 +0000</pubDate>
+      <guid>//localhost:8080/tags/cybersecurity/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Stig</title>
+      <link>//localhost:8080/tags/stig/</link>
+      <pubDate>Wed, 08 May 2024 00:00:00 +0000</pubDate>
+      <guid>//localhost:8080/tags/stig/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>System Hardening</title>
+      <link>//localhost:8080/tags/system-hardening/</link>
+      <pubDate>Wed, 08 May 2024 00:00:00 +0000</pubDate>
+      <guid>//localhost:8080/tags/system-hardening/</guid>
+      <description></description>
+    </item>
+  </channel>
+</rss>
