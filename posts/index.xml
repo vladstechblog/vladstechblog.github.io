@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on Vlads Tech</title>
+    <link>//localhost:8080/posts/</link>
+    <description>Recent content in Posts on Vlads Tech</description>
+    <generator>Hugo</generator>
+    <language>en-US</language>
+    <lastBuildDate>Tue, 15 Jul 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="//localhost:8080/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>My MacDventure Part 2: Burning ISOs on a Mac</title>
+      <link>//localhost:8080/posts/burning-isos-on-a-mac/</link>
+      <pubDate>Tue, 15 Jul 2025 00:00:00 +0000</pubDate>
+      <guid>//localhost:8080/posts/burning-isos-on-a-mac/</guid>
+      <description>&lt;h1 id=&#34;burning-isos-on-a-mac&#34;&gt;Burning ISOs On A Mac&lt;/h1&gt;&#xA;&lt;h2 id=&#34;intro&#34;&gt;Intro&lt;/h2&gt;&#xA;&lt;p&gt;So there I was again trying to feel at home on the Mac.&lt;/p&gt;&#xA;&lt;p&gt;The biggest challenge with migrating from Linux to Mac is the lack of tools and ways to do things that are taken for granted on a Linux system.&lt;/p&gt;&#xA;&lt;p&gt;For example the popular &lt;code&gt;gpg&lt;/code&gt; command line tool is not present on the Mac.&lt;/p&gt;&#xA;&lt;p&gt;So, your typical workflows, such as downloading and validating an ISO, are very likely to be derailed.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>My MacDventure Part 1: Setting Up Container-based C/C&#43;&#43; development Environment</title>
+      <link>//localhost:8080/posts/cpp-container-dev-environment/</link>
+      <pubDate>Tue, 17 Jun 2025 00:00:00 +0000</pubDate>
+      <guid>//localhost:8080/posts/cpp-container-dev-environment/</guid>
+      <description>&lt;p&gt;So there I was, with the gift of a brand new MacBook Air. Over the past&lt;br&gt;&#xA;decade and a half, my primary daily drivers have ALL been Linux.&lt;/p&gt;&#xA;&lt;p&gt;However, recently I decided to try something new. That something new&lt;br&gt;&#xA;involved getting a MacBook Air.&lt;/p&gt;&#xA;&lt;p&gt;I&amp;rsquo;ve been looking for a good coding platform, and most of the professional&lt;br&gt;&#xA;software engineers I know RAVE about how great Macs are. Well, Macs are&lt;br&gt;&#xA;Unix after all, and Unix is very similar to Linux. Therefore, I should be&lt;br&gt;&#xA;right at home. What could go wrong? Right????&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Don&#39;t Bow to the STIG. Scrutinize It!</title>
+      <link>//localhost:8080/posts/dont-bow-to-the-stig/</link>
+      <pubDate>Wed, 08 May 2024 00:00:00 +0000</pubDate>
+      <guid>//localhost:8080/posts/dont-bow-to-the-stig/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;Disclaimer: All views are my own and do not represent anyone else.&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;If you or your friends have done any DoD related IT work, then you probably&#xA;came across the term Security Technical Implementation Guides or STIGs.&#xA;STIGs are hardening guidelines that cover a wide range of topics such as&#xA;operating system, software development, containerization,&#xA;network equipment configuration, web browsers and more.&lt;/p&gt;&#xA;&lt;p&gt;The &amp;ldquo;application&amp;rdquo; of STIGs normally takes a form of a checklist that is&#xA;followed by IT/cyber security personnel.  Those checklists have applicable&#xA;configuration items, denoted by vulnerability or rule IDs. Each of those&#xA;STIG items corresponds to a &amp;ldquo;security setting&amp;rdquo; that must be applied to&#xA;the underlying system in order for it to be &amp;ldquo;compliant&amp;rdquo;.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

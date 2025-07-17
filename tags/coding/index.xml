@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Coding on Vlads Tech</title>
+    <link>//localhost:8080/tags/coding/</link>
+    <description>Recent content in Coding on Vlads Tech</description>
+    <generator>Hugo</generator>
+    <language>en-US</language>
+    <lastBuildDate>Tue, 17 Jun 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="//localhost:8080/tags/coding/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>My MacDventure Part 1: Setting Up Container-based C/C&#43;&#43; development Environment</title>
+      <link>//localhost:8080/posts/cpp-container-dev-environment/</link>
+      <pubDate>Tue, 17 Jun 2025 00:00:00 +0000</pubDate>
+      <guid>//localhost:8080/posts/cpp-container-dev-environment/</guid>
+      <description>&lt;p&gt;So there I was, with the gift of a brand new MacBook Air. Over the past&lt;br&gt;&#xA;decade and a half, my primary daily drivers have ALL been Linux.&lt;/p&gt;&#xA;&lt;p&gt;However, recently I decided to try something new. That something new&lt;br&gt;&#xA;involved getting a MacBook Air.&lt;/p&gt;&#xA;&lt;p&gt;I&amp;rsquo;ve been looking for a good coding platform, and most of the professional&lt;br&gt;&#xA;software engineers I know RAVE about how great Macs are. Well, Macs are&lt;br&gt;&#xA;Unix after all, and Unix is very similar to Linux. Therefore, I should be&lt;br&gt;&#xA;right at home. What could go wrong? Right????&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Oh My: Maintainable = Testable &#43; Understandable</title>
+      <link>//localhost:8080/ramblings/tdd/</link>
+      <pubDate>Tue, 17 Jun 2025 00:00:00 +0000</pubDate>
+      <guid>//localhost:8080/ramblings/tdd/</guid>
+      <description>&lt;p&gt;So there you were…  Palms sweaty, highly caffeinated, and ready to solve worlds problems with code.  You have a brilliant idea that will solve this tough problem, however, it requires modifying existing code base.  With plenty of creative freedom given by your boss, you embark on the journey of implementing this idea and bravely “improving” the existing code base.  You’re finally done and and excited to see your great idea come to life.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Ramblings on Vlads Tech</title>
+    <link>//localhost:8080/ramblings/</link>
+    <description>Recent content in Ramblings on Vlads Tech</description>
+    <generator>Hugo</generator>
+    <language>en-US</language>
+    <lastBuildDate>Tue, 17 Jun 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="//localhost:8080/ramblings/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Oh My: Maintainable = Testable &#43; Understandable</title>
+      <link>//localhost:8080/ramblings/tdd/</link>
+      <pubDate>Tue, 17 Jun 2025 00:00:00 +0000</pubDate>
+      <guid>//localhost:8080/ramblings/tdd/</guid>
+      <description>&lt;p&gt;So there you were…  Palms sweaty, highly caffeinated, and ready to solve worlds problems with code.  You have a brilliant idea that will solve this tough problem, however, it requires modifying existing code base.  With plenty of creative freedom given by your boss, you embark on the journey of implementing this idea and bravely “improving” the existing code base.  You’re finally done and and excited to see your great idea come to life.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

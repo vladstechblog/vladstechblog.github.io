@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=8080&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>My MacDventure Part 2: Burning ISOs on a Mac | Vlads Tech</title>
+
+    <link rel="stylesheet" href="/css/main.css">
+
+
+      <script src="/js/main.js"></script>
+
+
+</head>
+<body>
+  <header>
+    <div class="h1-logo">
+    <img src="/white_logo.svg"/>
+</div>
+
+<nav class="main-nav">
+    <a href="/">HOME</a>
+    <a href="/about">About</a>
+    <a href="/posts">Tech Posts</a>
+</nav>
+
+
+
+  </header>
+  <main>
+    
+  <h1>My MacDventure Part 2: Burning ISOs on a Mac</h1>
+
+  
+  
+  <time datetime="2025-07-15T00:00:00&#43;00:00">July 15, 2025</time>
+
+  <h1 id="burning-isos-on-a-mac">Burning ISOs On A Mac</h1>
+<h2 id="intro">Intro</h2>
+<p>So there I was again trying to feel at home on the Mac.</p>
+<p>The biggest challenge with migrating from Linux to Mac is the lack of tools and ways to do things that are taken for granted on a Linux system.</p>
+<p>For example the popular <code>gpg</code> command line tool is not present on the Mac.</p>
+<p>So, your typical workflows, such as downloading and validating an ISO, are very likely to be derailed.</p>
+<p>Thankfully containerization may help alleviate some of those challenges.</p>
+<p>This installment of my Macdventure is intended to provide another map sheet
+for navigating around the Mac hurdles.</p>
+<p>Due to lack of native GPG tooling on the Mac our workaround will be to use the official Rocky 9 container, mount our downloads inside and validate them from there.</p>
+<p>Let&rsquo;s get to it.</p>
+<h2 id="download-the-iso-and-signatures">Download the ISO and Signatures</h2>
+<ol>
+<li>
+<p>Let&rsquo;s start by creating a diretory where ISO and checksum-related
+files will be donwloaded</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-zsh" data-lang="zsh"><span style="display:flex;"><span>mkdir -p ~/iso_test/debian
+</span></span></code></pre></div></li>
+<li>
+<p>Download Debian ISO checksums, checksum signatures, and the ISO itself.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-zsh" data-lang="zsh"><span style="display:flex;"><span>curl -O --output-dir ~/iso_test/debian https://cdimage.debian.org/debian-cd/current/amd64/iso-dvd/SHA256SUMS
+</span></span><span style="display:flex;"><span>curl -O --output-dir ~/iso_test/debian https://cdimage.debian.org/debian-cd/current/amd64/iso-dvd/SHA256SUMS.sign
+</span></span><span style="display:flex;"><span>curl -L -O --output-dir ~/iso_test/debian https://cdimage.debian.org/debian-cd/current/amd64/iso-dvd/debian-12.11.0-amd64-DVD-1.iso
+</span></span></code></pre></div><p><strong>Note <code>-L</code> option to follow redirects to the ISO.</strong>
+<strong>It is needed due to high chance of being redirected to the closes mirror</strong></p>
+</li>
+</ol>
+<h2 id="getting-around-the-lack-of-gpg-utility">Getting Around the Lack of GPG Utility</h2>
+<p>Due to lack of native GPG tooling on the Mac our workaround will be to use the official Rocky 9 container, mount our downloads inside and validate them from there.</p>
+<ol>
+<li>
+<p>Start rockylinux container and mount the directory cotnaing downloaded files</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-zsh" data-lang="zsh"><span style="display:flex;"><span>podman run --rm -ti --name debian --user 65534:65534 -v $HOME/iso_test/debian:/dvd docker.io/library/rockylinux:9.3 
+</span></span></code></pre></div></li>
+<li>
+<p>Once inside the container change into the directory with downloaded files.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cd /dvd
+</span></span></code></pre></div></li>
+<li>
+<p>Check the GPG key ID with which the checksum file was sigend.
+The key ID will be the last 16 characters of the finterprint.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>gpg --verify SHA256SUMS.sign 
+</span></span></code></pre></div><p><img src="gpg_key_id.png" alt="GPG key ID"></p>
+</li>
+<li>
+<p>Verify that the key is one of the official debian keys posted
+<a href="https://www.debian.org/CD/verify">here</a>.</p>
+<p><img src="debian_gpg_key_listings.png" alt="debian keys"></p>
+</li>
+<li>
+<p>Download the correct GPG key.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>gpg --keyserver hkps://keyring.debian.org:443 --recv-keys 0xDA87E80D6294BE9B
+</span></span></code></pre></div><p><img src="download_gpg_key.png" alt="download GPG key"></p>
+</li>
+<li>
+<p>Validate signatures.  Note the <code>using RSA key</code> and <code>Good signature from</code> messages.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>gpg --verify SHA256SUMS.sign 
+</span></span></code></pre></div><p><img src="validate_cheskum_signature.png" alt="validate checkum signature"></p>
+</li>
+<li>
+<p>Validate the ISO.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sha256sum -c --ignore-missing SHA256SUMS
+</span></span></code></pre></div><p><img src="validate_iso.png" alt="validate ISO"></p>
+</li>
+</ol>
+<h2 id="burn-the-iso">Burn the ISO</h2>
+<ol>
+<li>
+<p>Insert the USB stick into the, when the window pops up click Ignore</p>
+</li>
+<li>
+<p>Check disk device and make sure it&rsquo;s not mounted.  In my case the
+results of the command below, listed the USB stick on which the ISO
+will be burned as <code>disk4</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-zsh" data-lang="zsh"><span style="display:flex;"><span>diskutil list
+</span></span><span style="display:flex;"><span>mount | grep &lt;identifier&gt; 
+</span></span></code></pre></div></li>
+<li>
+<p>Finally burn the ISO.
+<strong>Be very careful with specifying the output <code>of=</code> device!!!</strong>
+<strong>There is a reason why <code>dd</code> is nicknamed &ldquo;data destroyer.&rdquo;</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-zsh" data-lang="zsh"><span style="display:flex;"><span>sudo dd <span style="color:#66d9ef">if</span><span style="color:#f92672">=</span>/Users/&lt;username&gt;/iso_test/debian/debian-12.11.0-amd64-DVD-1.iso of<span style="color:#f92672">=</span>/dev/disk4 bs<span style="color:#f92672">=</span>4M status<span style="color:#f92672">=</span>progress 
+</span></span></code></pre></div></li>
+</ol>
+
+  
+  <div>
+    <div>Tags:</div>
+    <ul>
+        <li><a href="/tags/macdventure/">Macdventure</a></li>
+    </ul>
+  </div>
+
+
+  </main>
+  <footer>
+    <p>Copyright 2025. All rights reserved.</p>
+
+  </footer>
+</body>
+</html>

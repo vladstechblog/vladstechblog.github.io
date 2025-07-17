@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Stig on Vlads Tech</title>
+    <link>//localhost:8080/tags/stig/</link>
+    <description>Recent content in Stig on Vlads Tech</description>
+    <generator>Hugo</generator>
+    <language>en-US</language>
+    <lastBuildDate>Wed, 08 May 2024 00:00:00 +0000</lastBuildDate>
+    <atom:link href="//localhost:8080/tags/stig/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Don&#39;t Bow to the STIG. Scrutinize It!</title>
+      <link>//localhost:8080/posts/dont-bow-to-the-stig/</link>
+      <pubDate>Wed, 08 May 2024 00:00:00 +0000</pubDate>
+      <guid>//localhost:8080/posts/dont-bow-to-the-stig/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;Disclaimer: All views are my own and do not represent anyone else.&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;If you or your friends have done any DoD related IT work, then you probably&#xA;came across the term Security Technical Implementation Guides or STIGs.&#xA;STIGs are hardening guidelines that cover a wide range of topics such as&#xA;operating system, software development, containerization,&#xA;network equipment configuration, web browsers and more.&lt;/p&gt;&#xA;&lt;p&gt;The &amp;ldquo;application&amp;rdquo; of STIGs normally takes a form of a checklist that is&#xA;followed by IT/cyber security personnel.  Those checklists have applicable&#xA;configuration items, denoted by vulnerability or rule IDs. Each of those&#xA;STIG items corresponds to a &amp;ldquo;security setting&amp;rdquo; that must be applied to&#xA;the underlying system in order for it to be &amp;ldquo;compliant&amp;rdquo;.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
