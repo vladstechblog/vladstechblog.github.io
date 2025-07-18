@@ -13,7 +13,7 @@
       <link>//localhost:8080/about/</link>
       <pubDate>Wed, 16 Jul 2025 00:00:00 +0000</pubDate>
       <guid>//localhost:8080/about/</guid>
-      <description>&lt;p&gt;This blog is where I document my adventures, misadventures, and outright confusion as I attempt to transfer a decade and a half of Linux as a daily driver into the strange, glossy, and oddly silent world of macOS. Expect lots of how-to articles, a dash of sarcasm, and probably one too many terminal screenshots.&lt;/p&gt;</description>
+      <description>&lt;p&gt;This blog is where I document my adventures, misadventures, and outright confusion navigating the fast, wonderful world of technology. One of such adventure is my attempt to transfer a decade and a half of Linux as a daily driver into the strange, glossy, and oddly silent world of macOS.&lt;/p&gt;&#xA;&lt;p&gt;Expect lots of how-to articles, a dash of sarcasm, one too many terminal screenshots, and yes, original dad jokes.&lt;/p&gt;</description>
     </item>
     <item>
       <title>My MacDventure Part 2: Burning ISOs on a Mac</title>
@@ -28,6 +28,13 @@
       <pubDate>Tue, 17 Jun 2025 00:00:00 +0000</pubDate>
       <guid>//localhost:8080/dad-joke-originals/</guid>
       <description>&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;What do you do when you dopped a dad joke on the freeway?&#xA;Keep driving on&amp;hellip; Somebody will get it&amp;hellip;&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;Seirous question: what do you call somebody attending US Space Force ROTC?&#xA;A Space Cadet?&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
+    </item>
+    <item>
+      <title>Into the .deb: What am I Installing?</title>
+      <link>//localhost:8080/devops/into-dot-deb-what-am-i-installing/</link>
+      <pubDate>Tue, 17 Jun 2025 00:00:00 +0000</pubDate>
+      <guid>//localhost:8080/devops/into-dot-deb-what-am-i-installing/</guid>
+      <description>&lt;p&gt;So there I was, trying to install Nvidia drivers on my old homelab desktop.  As you would expect from a reasonable engineer, I started with doing a bit of good ole RTFM (read the field manual; or do you due diligence and look at the documentation).&lt;/p&gt;&#xA;&lt;p&gt;Generally, vendor documentation is a good place to start, however, looking at Nvidia Cuda Quick start Guide I saw this:&lt;/p&gt;&#xA;&lt;p&gt;&lt;img src=&#34;nvidia_install_instructions.png&#34; alt=&#34;Nvidia driver isntall instructions&#34;&gt;&lt;/p&gt;</description>
     </item>
     <item>
       <title>My MacDventure Part 1: Setting Up Container-based C/C&#43;&#43; development Environment</title>

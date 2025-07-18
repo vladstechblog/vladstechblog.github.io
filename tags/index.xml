@@ -23,6 +23,20 @@
       <description></description>
     </item>
     <item>
+      <title>Cybersecurity</title>
+      <link>//localhost:8080/tags/cybersecurity/</link>
+      <pubDate>Tue, 17 Jun 2025 00:00:00 +0000</pubDate>
+      <guid>//localhost:8080/tags/cybersecurity/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Devops</title>
+      <link>//localhost:8080/tags/devops/</link>
+      <pubDate>Tue, 17 Jun 2025 00:00:00 +0000</pubDate>
+      <guid>//localhost:8080/tags/devops/</guid>
+      <description></description>
+    </item>
+    <item>
       <title>Humor</title>
       <link>//localhost:8080/tags/humor/</link>
       <pubDate>Tue, 17 Jun 2025 00:00:00 +0000</pubDate>
@@ -30,17 +44,17 @@
       <description></description>
     </item>
     <item>
+      <title>Software Validation</title>
+      <link>//localhost:8080/tags/software-validation/</link>
+      <pubDate>Tue, 17 Jun 2025 00:00:00 +0000</pubDate>
+      <guid>//localhost:8080/tags/software-validation/</guid>
+      <description></description>
+    </item>
+    <item>
       <title>Tdd</title>
       <link>//localhost:8080/tags/tdd/</link>
       <pubDate>Tue, 17 Jun 2025 00:00:00 +0000</pubDate>
       <guid>//localhost:8080/tags/tdd/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Cybersecurity</title>
-      <link>//localhost:8080/tags/cybersecurity/</link>
-      <pubDate>Wed, 08 May 2024 00:00:00 +0000</pubDate>
-      <guid>//localhost:8080/tags/cybersecurity/</guid>
       <description></description>
     </item>
     <item>

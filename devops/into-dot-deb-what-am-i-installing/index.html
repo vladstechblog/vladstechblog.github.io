@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=8080&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>Into the .deb: What am I Installing? | Vlads Tech</title>
+
+    <link rel="stylesheet" href="/css/main.css">
+
+
+      <script src="/js/main.js"></script>
+
+
+</head>
+<body>
+  <header>
+    <div class="h1-logo">
+    <img src="/white_logo.svg"/>
+</div>
+
+<nav class="main-nav">
+    <a href="/">HOME</a>
+    <a href="/about">About</a>
+    <a href="/posts">Tech Posts</a>
+</nav>
+
+
+
+  </header>
+  <main>
+    
+  <h1>Into the .deb: What am I Installing?</h1>
+
+  
+  
+  <time datetime="2025-06-17T00:00:00&#43;00:00">June 17, 2025</time>
+
+  <p>So there I was, trying to install Nvidia drivers on my old homelab desktop.  As you would expect from a reasonable engineer, I started with doing a bit of good ole RTFM (read the field manual; or do you due diligence and look at the documentation).</p>
+<p>Generally, vendor documentation is a good place to start, however, looking at Nvidia Cuda Quick start Guide I saw this:</p>
+<p><img src="nvidia_install_instructions.png" alt="Nvidia driver isntall instructions"></p>
+<p>The highlighted section translates into: “please thoughtlessly download the <code>.deb</code> package and install it.” It almost looked like a former government employee wrote this. In the spirit of government documentation, instructions like these should be marked with “WTF” (“Without Thoughtful Foresight”), since their content clearly indicates that the author did not seem to think through the results.</p>
+<p>The issue with the instructions above is: they ask to blindly download and install a trust anchor (a thing that validates trust relationships with other things to be istalled) without validating the trust anchor itself. It may be a bit confusing to a casual observer unfamiliar with he software validation process by package mangers on Linux systems.</p>
+<p>Generally, in it is a good idea to understand the basics of the software validation hygiene.  Let’s break this down.</p>
+<p>When the software is distributed, especially for a Linux system, there is a healthy expectation of software integrity validation mechanisms to be in place (by a package manager, or checksum verification by a sys admin/devops/cyber person). The package manager relies on public GPG keys, distributed by the software authors. If the GPG keys are not already on the system, it is expected that their fingerprints are validated before importing those GPG keys into the OS key store. Such fingerprints are typically posted by the software vendors and can be generated with the following command:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>gpg —show—keys —with-fingerprints &lt;keyname&gt;
+</span></span></code></pre></div><p>The expected software validation process on a Linux system with
+a package manager is as follows:</p>
+<ol>
+<li>
+<p>Download software vendor&rsquo;s public GPG key</p>
+</li>
+<li>
+<p>Validate vendor&rsquo;s public GPG key fingerprint</p>
+</li>
+<li>
+<p>Import GPG keys into OS’s key stroke</p>
+</li>
+<li>
+<p>Install software with a package manager
+(package manager will perform GPG key validation).</p>
+</li>
+</ol>
+<p>Generally the package manger will throw an error and stop the installation process, if the software it tries to install fails the validation process against the vendor&rsquo;s public GPG key.</p>
+<p>With the process above in mind let&rsquo;s dig in a bit deeper by extracting the <code>.deb</code> mentioned in the Nvidia driver installation instructions. <code>.deb</code> packates are <code>ar</code> archives which contain three parts:</p>
+<ul>
+<li><code>debian-binary</code>: a text file containing version of <code>.deb</code> package format</li>
+<li><code>control.tar.xz</code>: checksums and package metadata</li>
+<li><code>data.tar.xz</code>: actual things which will be installed on the system</li>
+</ul>
+<p>The archive we care about is <code>data.tar.xz</code> which will contain the items to be installed on the system.</p>
+<p><img src="extracted_data.png" alt="extracted data"></p>
+<p>Extracting the <code>data.tar.xz</code> reveals two interesting files. The first one is <code>cuda-debian12-x86_64.list</code>, which configures Nvidia apt repo, including the location of the locally-installed GPG key which will be used for software package validation. The second file is the <code>cuda-archive-keyring.gpg</code> which is the GPG key itself. Based on the extracted marerial, it looks like the <code>.deb</code> package in question will indeed configure Nvidia apt repo and install a GPG key to validate it. Let’s see if the GPG key it installs is legitimate by extracting it, generating the fingerprint, and searching the web for the resulting fingerprint.</p>
+<p><img src="extracted_gpg_fingerprint.png" alt="extracted fingerprint"></p>
+<p>Unfortunately, Nvidia does not seem to publish their GPG key fingerprints. A quick web does reveal, what seems to be an official Nvidia repo with some package validation instructions which seem to match our generated GPG key fingerprint. At this point there is a strong indication that this key is legitimate, however, it is not 100% certain since there is no official post from Nvidia publishing the GPG fingerprints.</p>
+<p><img src="web_search_for_fingerprint.png" alt="fingerprint search"></p>
+<p><img src="repo_with_key_fingerprints.png" alt="github repo with matching fingerprints"></p>
+<p>This is one of those examples where a sys admin/devops/cyber engineer can go so far with GPG keys validation, since the vendor does not seem to care. This would be a perfect case demonstrating the risk acceptance decisions cybersecurity professionals have to make. However, those decisions are <strong>NOT</strong> automatic and should only happen <strong>after exercising due diligence</strong>.</p>
+
+  
+  <div>
+    <div>Tags:</div>
+    <ul>
+        <li><a href="/tags/devops/">Devops</a></li>
+        <li><a href="/tags/software-validation/">Software Validation</a></li>
+        <li><a href="/tags/cybersecurity/">Cybersecurity</a></li>
+    </ul>
+  </div>
+
+
+  </main>
+  <footer>
+    <p>Copyright 2025. All rights reserved.</p>
+
+  </footer>
+</body>
+</html>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Devops on Vlads Tech</title>
+    <link>//localhost:8080/tags/devops/</link>
+    <description>Recent content in Devops on Vlads Tech</description>
+    <generator>Hugo</generator>
+    <language>en-US</language>
+    <lastBuildDate>Tue, 17 Jun 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="//localhost:8080/tags/devops/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Into the .deb: What am I Installing?</title>
+      <link>//localhost:8080/devops/into-dot-deb-what-am-i-installing/</link>
+      <pubDate>Tue, 17 Jun 2025 00:00:00 +0000</pubDate>
+      <guid>//localhost:8080/devops/into-dot-deb-what-am-i-installing/</guid>
+      <description>&lt;p&gt;So there I was, trying to install Nvidia drivers on my old homelab desktop.  As you would expect from a reasonable engineer, I started with doing a bit of good ole RTFM (read the field manual; or do you due diligence and look at the documentation).&lt;/p&gt;&#xA;&lt;p&gt;Generally, vendor documentation is a good place to start, however, looking at Nvidia Cuda Quick start Guide I saw this:&lt;/p&gt;&#xA;&lt;p&gt;&lt;img src=&#34;nvidia_install_instructions.png&#34; alt=&#34;Nvidia driver isntall instructions&#34;&gt;&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
