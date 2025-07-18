@@ -23,10 +23,22 @@
     <loc>//localhost:8080/tags/coding/</loc>
     <lastmod>2025-06-17T00:00:00+00:00</lastmod>
   </url><url>
+    <loc>//localhost:8080/tags/cybersecurity/</loc>
+    <lastmod>2025-06-17T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>//localhost:8080/dad-joke-originals/</loc>
     <lastmod>2025-06-17T00:00:00+00:00</lastmod>
   </url><url>
+    <loc>//localhost:8080/devops/</loc>
+    <lastmod>2025-06-17T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>//localhost:8080/tags/devops/</loc>
+    <lastmod>2025-06-17T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>//localhost:8080/tags/humor/</loc>
+    <lastmod>2025-06-17T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>//localhost:8080/devops/into-dot-deb-what-am-i-installing/</loc>
     <lastmod>2025-06-17T00:00:00+00:00</lastmod>
   </url><url>
     <loc>//localhost:8080/posts/cpp-container-dev-environment/</loc>
@@ -38,11 +50,11 @@
     <loc>//localhost:8080/ramblings/</loc>
     <lastmod>2025-06-17T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:8080/tags/tdd/</loc>
+    <loc>//localhost:8080/tags/software-validation/</loc>
     <lastmod>2025-06-17T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:8080/tags/cybersecurity/</loc>
-    <lastmod>2024-05-08T00:00:00+00:00</lastmod>
+    <loc>//localhost:8080/tags/tdd/</loc>
+    <lastmod>2025-06-17T00:00:00+00:00</lastmod>
   </url><url>
     <loc>//localhost:8080/posts/dont-bow-to-the-stig/</loc>
     <lastmod>2024-05-08T00:00:00+00:00</lastmod>
