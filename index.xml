@@ -23,6 +23,13 @@
       <description>&lt;h1 id=&#34;burning-isos-on-a-mac&#34;&gt;Burning ISOs On A Mac&lt;/h1&gt;&#xA;&lt;h2 id=&#34;intro&#34;&gt;Intro&lt;/h2&gt;&#xA;&lt;p&gt;So there I was again trying to feel at home on the Mac.&lt;/p&gt;&#xA;&lt;p&gt;The biggest challenge with migrating from Linux to Mac is the lack of tools and ways to do things that are taken for granted on a Linux system.&lt;/p&gt;&#xA;&lt;p&gt;For example the popular &lt;code&gt;gpg&lt;/code&gt; command line tool is not present on the Mac.&lt;/p&gt;&#xA;&lt;p&gt;So, your typical workflows, such as downloading and validating an ISO, are very likely to be derailed.&lt;/p&gt;</description>
     </item>
     <item>
+      <title>Automating Rocky Linux VM Provisioning with Ansible on KVM Hypervisor</title>
+      <link>//localhost:8080/devops/automating-rockylinux-provisioning-on-kvm/</link>
+      <pubDate>Thu, 19 Jun 2025 00:00:00 +0000</pubDate>
+      <guid>//localhost:8080/devops/automating-rockylinux-provisioning-on-kvm/</guid>
+      <description>&lt;h2 id=&#34;intro&#34;&gt;Intro&lt;/h2&gt;&#xA;&lt;p&gt;I absolutely love KVM hypervisor! It&amp;rsquo;s free and has a great CLI interface&#xA;which makes it easier to automate things.&lt;/p&gt;&#xA;&lt;p&gt;It also comes with a very powerful &lt;code&gt;virt-install&lt;/code&gt; utility,&#xA;which eliminates the need to use third-party tools like Packer.&lt;/p&gt;&#xA;&lt;p&gt;When combined with tools like Ansible and kickstart, &lt;code&gt;virt-install&lt;/code&gt; makes&#xA;VM provisioning a breeze.&lt;/p&gt;&#xA;&lt;h2 id=&#34;gotchas-to-keep-in-mind&#34;&gt;Gotchas to Keep in Mind&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;Keep in mind the qemu connection type and current user group memberships.&#xA;A user must be a member of &lt;code&gt;libvirt&lt;/code&gt; group in order to leverage system&#xA;connections without root privileges.&lt;/p&gt;</description>
+    </item>
+    <item>
       <title>Dad Joke Originals</title>
       <link>//localhost:8080/dad-joke-originals/</link>
       <pubDate>Tue, 17 Jun 2025 00:00:00 +0000</pubDate>
@@ -56,6 +63,13 @@
       <pubDate>Wed, 08 May 2024 00:00:00 +0000</pubDate>
       <guid>//localhost:8080/posts/dont-bow-to-the-stig/</guid>
       <description>&lt;p&gt;&lt;strong&gt;Disclaimer: All views are my own and do not represent anyone else.&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;If you or your friends have done any DoD related IT work, then you probably&#xA;came across the term Security Technical Implementation Guides or STIGs.&#xA;STIGs are hardening guidelines that cover a wide range of topics such as&#xA;operating system, software development, containerization,&#xA;network equipment configuration, web browsers and more.&lt;/p&gt;&#xA;&lt;p&gt;The &amp;ldquo;application&amp;rdquo; of STIGs normally takes a form of a checklist that is&#xA;followed by IT/cyber security personnel.  Those checklists have applicable&#xA;configuration items, denoted by vulnerability or rule IDs. Each of those&#xA;STIG items corresponds to a &amp;ldquo;security setting&amp;rdquo; that must be applied to&#xA;the underlying system in order for it to be &amp;ldquo;compliant&amp;rdquo;.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title></title>
+      <link>//localhost:8080/mind-the-gap/a-case-for-air-gap/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>//localhost:8080/mind-the-gap/a-case-for-air-gap/</guid>
+      <description></description>
     </item>
   </channel>
 </rss>

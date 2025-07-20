@@ -6,8 +6,15 @@
     <description>Recent content in Devops on Vlads Tech</description>
     <generator>Hugo</generator>
     <language>en-US</language>
-    <lastBuildDate>Tue, 17 Jun 2025 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 19 Jun 2025 00:00:00 +0000</lastBuildDate>
     <atom:link href="//localhost:8080/tags/devops/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Automating Rocky Linux VM Provisioning with Ansible on KVM Hypervisor</title>
+      <link>//localhost:8080/devops/automating-rockylinux-provisioning-on-kvm/</link>
+      <pubDate>Thu, 19 Jun 2025 00:00:00 +0000</pubDate>
+      <guid>//localhost:8080/devops/automating-rockylinux-provisioning-on-kvm/</guid>
+      <description>&lt;h2 id=&#34;intro&#34;&gt;Intro&lt;/h2&gt;&#xA;&lt;p&gt;I absolutely love KVM hypervisor! It&amp;rsquo;s free and has a great CLI interface&#xA;which makes it easier to automate things.&lt;/p&gt;&#xA;&lt;p&gt;It also comes with a very powerful &lt;code&gt;virt-install&lt;/code&gt; utility,&#xA;which eliminates the need to use third-party tools like Packer.&lt;/p&gt;&#xA;&lt;p&gt;When combined with tools like Ansible and kickstart, &lt;code&gt;virt-install&lt;/code&gt; makes&#xA;VM provisioning a breeze.&lt;/p&gt;&#xA;&lt;h2 id=&#34;gotchas-to-keep-in-mind&#34;&gt;Gotchas to Keep in Mind&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;Keep in mind the qemu connection type and current user group memberships.&#xA;A user must be a member of &lt;code&gt;libvirt&lt;/code&gt; group in order to leverage system&#xA;connections without root privileges.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Into the .deb: What am I Installing?</title>
       <link>//localhost:8080/devops/into-dot-deb-what-am-i-installing/</link>
