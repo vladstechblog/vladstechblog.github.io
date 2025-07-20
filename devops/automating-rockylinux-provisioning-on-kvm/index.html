@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=8080&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>Automating Rocky Linux VM Provisioning with Ansible on KVM Hypervisor | Vlads Tech</title>
+
+    <link rel="stylesheet" href="/css/main.css">
+
+
+      <script src="/js/main.js"></script>
+
+
+</head>
+<body>
+  <header>
+    <div class="h1-logo">
+    <img src="/white_logo.svg"/>
+</div>
+
+<nav class="main-nav">
+    <a href="/">HOME</a>
+    <a href="/about">About</a>
+    <a href="/posts">Tech Posts</a>
+</nav>
+
+
+
+  </header>
+  <main>
+    
+  <h1>Automating Rocky Linux VM Provisioning with Ansible on KVM Hypervisor</h1>
+
+  
+  
+  <time datetime="2025-06-19T00:00:00&#43;00:00">June 19, 2025</time>
+
+  <h2 id="intro">Intro</h2>
+<p>I absolutely love KVM hypervisor! It&rsquo;s free and has a great CLI interface
+which makes it easier to automate things.</p>
+<p>It also comes with a very powerful <code>virt-install</code> utility,
+which eliminates the need to use third-party tools like Packer.</p>
+<p>When combined with tools like Ansible and kickstart, <code>virt-install</code> makes
+VM provisioning a breeze.</p>
+<h2 id="gotchas-to-keep-in-mind">Gotchas to Keep in Mind</h2>
+<ul>
+<li>
+<p>Keep in mind the qemu connection type and current user group memberships.
+A user must be a member of <code>libvirt</code> group in order to leverage system
+connections without root privileges.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>virt-install --connect qemu:///session <span style="color:#75715e"># local user session</span>
+</span></span><span style="display:flex;"><span>virt-install --connect qemu:///system <span style="color:#75715e"># system wide session</span>
+</span></span></code></pre></div></li>
+<li>
+<p>Make sure you have write access to the directory where the virtual drive
+will be created. File access control list (FACL) is one way to manage it.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># mkdir /var/lib/libvirt/images/test</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># setfact -R -m u:&lt;your-user&gt;:rwX</span>
+</span></span></code></pre></div></li>
+<li>
+<p>Make sure user <code>libvirt-qemu</code> has read permissions to the location where
+the OS ISO is stored.</p>
+</li>
+</ul>
+<h2 id="lets-provision-a-rocky-10-vm">Let&rsquo;s Provision A Rocky 10 VM</h2>
+<h3 id="prerequisitessystem-overview">Prerequisites/System Overview</h3>
+<ul>
+<li>Host OS: Debian 12</li>
+<li>RAM: enough for your needs</li>
+<li>Storage: enough for your needs</li>
+<li>CPU Cores: the more the better</li>
+<li>current user account is a part of <code>libvirt</code> group
+<pre tabindex="0"><code># usermod -G libvirt -a &lt;your_user&gt;
+</code></pre></li>
+</ul>
+<h3 id="ansible-setup">Ansible setup</h3>
+<ul>
+<li>
+<p>Note conventions:</p>
+<ul>
+<li><code>$</code>: normal user shell</li>
+<li><code>&gt;</code>: Python venv shell</li>
+<li><strong>all Ansible commands are run from Python venv</strong></li>
+</ul>
+</li>
+<li>
+<p><strong>Ansible isntalled on the host via pip</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ python3 -m venv ~/ansible_env
+</span></span><span style="display:flex;"><span>$ source ~/ansible_env/bin/acivate
+</span></span><span style="display:flex;"><span>&gt; pip install --upgrade pip
+</span></span><span style="display:flex;"><span>&gt; pip install ansible ansible-dev-tools
+</span></span></code></pre></div></li>
+<li>
+<p>install the role (wihtout <code>-p</code>, the default install location is:
+<code>~/.ansible/roles</code>)</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>mkdir roles
+</span></span><span style="display:flex;"><span>ansible-glaxy role install -p roles git+https://github.com/vladstechblog/role-provision-rocky10-kvm-vm.git
+</span></span></code></pre></div></li>
+<li>
+<p>create a playbook to run the role; see example in the role
+<a href="https://github.com/vladstechblog/role-provision-rocky10-kvm-vm">README</a></p>
+</li>
+<li>
+<p>at this point your directory structure should look like this:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plaintext" data-lang="plaintext"><span style="display:flex;"><span>.
+</span></span><span style="display:flex;"><span>|-- my_playbook_to_invoke_role.yml
+</span></span><span style="display:flex;"><span>`-- roles
+</span></span><span style="display:flex;"><span>    `-- role-provision-rocky10-kvm-vm  
+</span></span></code></pre></div></li>
+<li>
+<p>run the playbook</p>
+<p><img src="run_provisioning_playbook.png" alt="run the playbook"></p>
+</li>
+<li>
+<p>and wait for it to finish</p>
+<p><img src="playbook_finished.png" alt="playbook finished"></p>
+</li>
+<li>
+<p>start vm and log into it</p>
+<p><img src="start_vm_and_ssh_in.png" alt="start vm and ssh in"></p>
+</li>
+</ul>
+
+  
+  <div>
+    <div>Tags:</div>
+    <ul>
+        <li><a href="/tags/devops/">Devops</a></li>
+    </ul>
+  </div>
+
+
+  </main>
+  <footer>
+    <p>Copyright 2025. All rights reserved.</p>
+
+  </footer>
+</body>
+</html>

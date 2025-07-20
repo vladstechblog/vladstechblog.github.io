@@ -20,6 +20,15 @@
     <loc>//localhost:8080/tags/</loc>
     <lastmod>2025-07-15T00:00:00+00:00</lastmod>
   </url><url>
+    <loc>//localhost:8080/devops/automating-rockylinux-provisioning-on-kvm/</loc>
+    <lastmod>2025-06-19T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>//localhost:8080/devops/</loc>
+    <lastmod>2025-06-19T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>//localhost:8080/tags/devops/</loc>
+    <lastmod>2025-06-19T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>//localhost:8080/tags/coding/</loc>
     <lastmod>2025-06-17T00:00:00+00:00</lastmod>
   </url><url>
@@ -27,12 +36,6 @@
     <lastmod>2025-06-17T00:00:00+00:00</lastmod>
   </url><url>
     <loc>//localhost:8080/dad-joke-originals/</loc>
-    <lastmod>2025-06-17T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>//localhost:8080/devops/</loc>
-    <lastmod>2025-06-17T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>//localhost:8080/tags/devops/</loc>
     <lastmod>2025-06-17T00:00:00+00:00</lastmod>
   </url><url>
     <loc>//localhost:8080/tags/humor/</loc>
@@ -65,6 +68,10 @@
     <loc>//localhost:8080/tags/system-hardening/</loc>
     <lastmod>2024-05-08T00:00:00+00:00</lastmod>
   </url><url>
+    <loc>//localhost:8080/mind-the-gap/a-case-for-air-gap/</loc>
+  </url><url>
     <loc>//localhost:8080/categories/</loc>
+  </url><url>
+    <loc>//localhost:8080/mind-the-gap/</loc>
   </url>
 </urlset>

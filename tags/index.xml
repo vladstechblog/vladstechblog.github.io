@@ -16,6 +16,13 @@
       <description></description>
     </item>
     <item>
+      <title>Devops</title>
+      <link>//localhost:8080/tags/devops/</link>
+      <pubDate>Thu, 19 Jun 2025 00:00:00 +0000</pubDate>
+      <guid>//localhost:8080/tags/devops/</guid>
+      <description></description>
+    </item>
+    <item>
       <title>Coding</title>
       <link>//localhost:8080/tags/coding/</link>
       <pubDate>Tue, 17 Jun 2025 00:00:00 +0000</pubDate>
@@ -27,13 +34,6 @@
       <link>//localhost:8080/tags/cybersecurity/</link>
       <pubDate>Tue, 17 Jun 2025 00:00:00 +0000</pubDate>
       <guid>//localhost:8080/tags/cybersecurity/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Devops</title>
-      <link>//localhost:8080/tags/devops/</link>
-      <pubDate>Tue, 17 Jun 2025 00:00:00 +0000</pubDate>
-      <guid>//localhost:8080/tags/devops/</guid>
       <description></description>
     </item>
     <item>
