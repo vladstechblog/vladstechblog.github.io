@@ -91,8 +91,8 @@ a self-signed TLS CA cert with those exact values?</p>
 (CSR) with the desired subject fields:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ openssl req -new -newkey rsa:4095 -nodes -keyout privkey.pem -out fakeca.csr -batch -subj <span style="color:#e6db74">&#34;/C=US/O=U.S. Government/OU=DoD/OU=PKI/CN=DoD Root CA 3&#34;</span> -addext <span style="color:#e6db74">&#34;basicConstraints=critical,CA:TRUE&#34;</span>
 </span></span></code></pre></div><p>Let&rsquo;s verify that the subject contains correct values by running the following:</p>
-<pre tabindex="0"><code>$ openssl req -noout -in fakeca.csr -subject 
-</code></pre><p><img src="check-subject-fields.png" alt="check-subject-fields"></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ openssl req -noout -in fakeca.csr -subject 
+</span></span></code></pre></div><p><img src="check-subject-fields.png" alt="check-subject-fields"></p>
 <p>Let&rsquo;s sign the CSR while adding desired dates and double-checking
 the subject fields one more time before approving the newly-minted CA.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ openssl ca -in fakeca.csr -keyfile privkey.pem -extensions v3_ca -selfsign -policy policy_anything -out demoCA/newcerts/newcert.pem -startdate 20120320184641Z -enddate 20291230184641Z
@@ -119,8 +119,8 @@ of the certificate in question.</p>
 of the cert installed on the system and compare it to the one
 published in the official memo.</p>
 <p>The cert fingerprint can be generated as follows:</p>
-<pre tabindex="0"><code>$ openssl x509 -fingerprint -in /path/to/cert
-</code></pre><p><img src="fingerprint-generated.png" alt="generated-CA-fingerprint"></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ openssl x509 -fingerprint -in /path/to/cert
+</span></span></code></pre></div><p><img src="fingerprint-generated.png" alt="generated-CA-fingerprint"></p>
 <p>Here is what the result should look like:</p>
 <p><img src="fingerpirnt-comparison.png" alt="fingeprint-comparison"></p>
 <h2 id="lessons-learned">Lessons Learned</h2>
