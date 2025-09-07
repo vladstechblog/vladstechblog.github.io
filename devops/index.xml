@@ -22,5 +22,12 @@
       <guid>//localhost:8080/devops/into-dot-deb-what-am-i-installing/</guid>
       <description>&lt;p&gt;So there I was, trying to install Nvidia drivers on my old homelab desktop.  As you would expect from a reasonable engineer, I started with doing a bit of good ole RTFM (read the field manual; or do you due diligence and look at the documentation).&lt;/p&gt;&#xA;&lt;p&gt;Generally, vendor documentation is a good place to start, however, looking at Nvidia Cuda Quick start Guide I saw this:&lt;/p&gt;&#xA;&lt;p&gt;&lt;img src=&#34;nvidia_install_instructions.png&#34; alt=&#34;Nvidia driver isntall instructions&#34;&gt;&lt;/p&gt;</description>
     </item>
+    <item>
+      <title></title>
+      <link>//localhost:8080/devops/working-with-rocky-containers-airgapped/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>//localhost:8080/devops/working-with-rocky-containers-airgapped/</guid>
+      <description>&lt;h1 id=&#34;working-with-rocky10-container-airgapped&#34;&gt;Working With Rocky10 Container Airgapped&lt;/h1&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;overview&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;test case molecule with ISO&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;setting-up-rocky-10-repo-from-install-dvd-iso&#34;&gt;Setting Up Rocky 10 Repo from Install DVD ISO&lt;/h2&gt;&#xA;&lt;h2 id=&#34;building-rocky-images-with-iso-support&#34;&gt;Building Rocky images with ISO support&lt;/h2&gt;&#xA;&lt;h2 id=&#34;molecule-with-iso&#34;&gt;Molecule with ISO&lt;/h2&gt;</description>
+    </item>
   </channel>
 </rss>

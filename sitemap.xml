@@ -68,10 +68,22 @@
     <loc>//localhost:8080/tags/system-hardening/</loc>
     <lastmod>2024-05-08T00:00:00+00:00</lastmod>
   </url><url>
+    <loc>//localhost:8080/automation/ansible/ansible_notables/</loc>
+  </url><url>
+    <loc>//localhost:8080/automation/ansible/molecule/</loc>
+  </url><url>
+    <loc>//localhost:8080/devops/working-with-rocky-containers-airgapped/</loc>
+  </url><url>
     <loc>//localhost:8080/mind-the-gap/a-case-for-air-gap/</loc>
+  </url><url>
+    <loc>//localhost:8080/workflow_optimization/tmux/</loc>
+  </url><url>
+    <loc>//localhost:8080/automation/</loc>
   </url><url>
     <loc>//localhost:8080/categories/</loc>
   </url><url>
     <loc>//localhost:8080/mind-the-gap/</loc>
+  </url><url>
+    <loc>//localhost:8080/workflow_optimization/</loc>
   </url>
 </urlset>
