@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Embedded on Vlad&#39;s Tech</title>
+    <link>/tags/embedded/</link>
+    <description>Recent content in Embedded on Vlad&#39;s Tech</description>
+    <generator>Hugo</generator>
+    <language>en-US</language>
+    <lastBuildDate>Mon, 19 Oct 2026 00:00:00 +0000</lastBuildDate>
+    <atom:link href="/tags/embedded/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Wrangling Two Monsters Part II: TDD with PICO C/C&#43;&#43; SDK in a Nutshell</title>
+      <link>/trad-dev-posts/wrangling-two-monsters-part-2/</link>
+      <pubDate>Mon, 19 Oct 2026 00:00:00 +0000</pubDate>
+      <guid>/trad-dev-posts/wrangling-two-monsters-part-2/</guid>
+      <description>&lt;h2 id=&#34;intro&#34;&gt;Intro&lt;/h2&gt;&#xA;&lt;p&gt;In part I, we&amp;rsquo;ve addressed the first monter, setting up a CMake project&#xA;for TDD with Pico C/C++ SDK. This article will attempt to wrangle the&#xA;second monster, the PICO C/C++ SDK itself&lt;/p&gt;&#xA;&lt;h2 id=&#34;tdd-setup-overview&#34;&gt;TDD Setup Overview&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;terms:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;code&gt;host build&lt;/code&gt;: code compiler for your development architecture&#xA;(Your dev laptop)&lt;/li&gt;&#xA;&lt;li&gt;&lt;code&gt;target build&lt;/code&gt;: code compiler for the Pico board&lt;/li&gt;&#xA;&lt;li&gt;&lt;code&gt;target&lt;/code&gt;: generic reference for which platform the project is built&lt;/li&gt;&#xA;&lt;li&gt;&lt;code&gt;CMake target&lt;/code&gt; (for the purpose of this article): an item which will&#xA;be produced by CMake build system&lt;/li&gt;&#xA;&lt;li&gt;&lt;code&gt;listfile&lt;/code&gt;: file containing CMake language&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;All development will be done in a Debian container&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Wrangling Two Monsters Part I: CMake and Pico C/C&#43;&#43; SDK Setup for TDD</title>
+      <link>/trad-dev-posts/wrangling-two-monsters-part-1/</link>
+      <pubDate>Sun, 18 Oct 2026 00:00:00 +0000</pubDate>
+      <guid>/trad-dev-posts/wrangling-two-monsters-part-1/</guid>
+      <description>&lt;h2 id=&#34;intro&#34;&gt;Intro&lt;/h2&gt;&#xA;&lt;p&gt;Embedded world is a tedious place. The best way to navigate it while keeping&#xA;your sanity is through the practice of Test Driven Development (TDD).&lt;/p&gt;&#xA;&lt;p&gt;Being a bit blunt, Pico C/C++ SDK is a monstrosity&#xA;(huge codebase with nested projects) managed by another monstrosity (CMake).&lt;/p&gt;&#xA;&lt;p&gt;Nevertheless, both can be dealt with by using the popular strategy of&#xA;&amp;ldquo;How to eat an elephant&amp;rdquo; - one small piece at a time.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

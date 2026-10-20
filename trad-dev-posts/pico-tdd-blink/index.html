@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=8080&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>Wrangling Two Monsters Part II: TDD with PICO C/C&#43;&#43; SDK in a Nutshell | Vlad&#39;s Tech</title>
+
+    <link rel="stylesheet" href="/css/main.css">
+
+
+      <script src="/js/main.js"></script>
+
+
+</head>
+<body>
+  <header>
+    <div class="h1-logo">
+    <img src="/white_logo.svg"/>
+</div>
+
+<nav class="main-nav">
+    <a href="/">HOME</a>
+    <a href="/about">About</a>
+    <a href="/trad-dev-posts">Trad Dev Posts</a>
+    <a href="/tags">Tags</a>
+</nav>
+
+
+
+
+  </header>
+  <main>
+    
+  <h1>Wrangling Two Monsters Part II: TDD with PICO C/C&#43;&#43; SDK in a Nutshell</h1>
+
+  
+  
+  <time datetime="2026-10-19T00:00:00&#43;00:00">October 19, 2026</time>
+
+  <h2 id="intro">Intro</h2>
+<p>In part I, we&rsquo;ve addressed the first monter, setting up a CMake project
+for TDD with Pico C/C++ SDK. This article will attempt to wrangle the
+second monster, the PICO C/C++ SDK itself</p>
+<h2 id="tdd-setup-overview">TDD Setup Overview</h2>
+<ul>
+<li>
+<p>terms:</p>
+<ul>
+<li><code>host build</code>: code compiler for your development architecture
+(Your dev laptop)</li>
+<li><code>target build</code>: code compiler for the Pico board</li>
+<li><code>target</code>: generic reference for which platform the project is built</li>
+<li><code>CMake target</code> (for the purpose of this article): an item which will
+be produced by CMake build system</li>
+<li><code>listfile</code>: file containing CMake language</li>
+</ul>
+</li>
+<li>
+<p>All development will be done in a Debian container</p>
+<ul>
+<li>with a local development directory mounted into <code>/home/developer</code> inside
+the container (aka <code>~/</code>)</li>
+</ul>
+</li>
+<li>
+<p>all pico-related GitHub repos are located in <code>~/pico</code>, inside the development
+container and their corresponding environment variables are set as per this
+<a href="https://github.com/raspberrypi/pico-setup/blob/master/pico_setup.sh">script</a></p>
+</li>
+<li>
+<p>TDD will be conducted on the host build.
+<code>cmake -B build_host -DPICO_PLATFORM=host -DPICO_NO_PICOTOOL=True -DCMAKE_BUILD_TYPE=Debug</code></p>
+</li>
+<li>
+<p>CppUTest repo will be located in the <code>/home/developer/cpputest</code></p>
+</li>
+<li>
+<p>board specifics will be skipped in order to reduce an already dense material.</p>
+</li>
+<li>
+<p>use this <a href="https://github.com/vladstechblog/pico_blink_tdd.git">repo</a>
+to follow along</p>
+</li>
+</ul>
+<h2 id="tdd-overview">TDD Overview</h2>
+<p>Test driven development is a software engineering methodology where
+A failing test is written before the source code. Then just enough
+source code is written for the test to pass, followed by
+clean up/refactoring. This development cycle is called
+RED/GREEN/REFACTOR. The description above is an oversimplification
+of the process, but it will server it&rsquo;s purpose for this article.</p>
+<h2 id="a-short-tdd-example">A Short TDD Example</h2>
+<p>As per Pico C/C++ SDK examples, before Pico board can blink an LED,
+a basic pin setup must be performed. First a GPIO pin must be selected
+(initialized) for the task. Second, the same pin must be configured
+as an output pin.</p>
+<h3 id="gpio-initialization-test-red">GPIO Initialization Test (RED)</h3>
+<p>Check out <code>gpio_init_test</code> branch if you are following along:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>git checkout gpio_init_test
+</span></span></code></pre></div><p>Let&rsquo;s start simple.  In order to keep the code modular and therefore
+testable lets move the application source code in <code>src/app.c</code> and
+Corresponding headers to <code>src/include/app.h</code>.  The program entry point
+Will be <code>app_main()</code> defined in the src/App.c file. It will,
+in turn, setup GPIO pins, and later perform the blinking.</p>
+<p>App.c:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C" data-lang="C"><span style="display:flex;"><span>Void <span style="color:#a6e22e">app_main</span>(){
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">//initialize GPIO
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#75715e">//then blink
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div><p>Following the TDD RED/GREEN/REFACTOR methodology we&rsquo;ll start by writing
+A failing test which expects <code>app_main()</code> to call <code>gpio_init()</code> with
+The correct parameters.</p>
+<p>First we&rsquo;ll create a test group which will manage the desired state
+For our tests.  For now it will be limited only to cleanup performed
+By the <code>teardown()</code> method.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span>TEST_GROUP(App)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">setup</span>(){
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e">//TODO
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">teardown</span>(){
+</span></span><span style="display:flex;"><span>      mock().checkExpectations();
+</span></span><span style="display:flex;"><span>      mock().clear();;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><p>With <code>App</code> test group setup up, the first test <code>CallsGPIOInitWithCorrectArguments</code>
+will look as this:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span>TEST(App, CallsGPIOInitWithCorrectArguments){
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">int</span> led_pin <span style="color:#f92672">=</span> <span style="color:#ae81ff">15</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  mock().expectOneCall(<span style="color:#e6db74">&#34;gpio_init&#34;</span>)
+</span></span><span style="display:flex;"><span>    .withUnsignedIntParameter(<span style="color:#e6db74">&#34;pinNum&#34;</span>, led_pin);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  app_main();
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>The biggest bottleneck/sticking point of doing TDD is the collaborators
+(dependencies like I/O, OS, hardware, etc). Often it may be
+impossible to test agains a collaborator directly, in which case
+those dependencies must be substituted while allowing to validate
+the behavior of code under test (CUT).</p>
+<p>In the test above we will use CppUTest Mock framework. Mock frameworks
+allow to validate that code under test will invoke dependent on code (DOC)
+A specific amount of times, in a specific order, with specific arguments.</p>
+<p>Outlining the exact way that the code under test must invoke the
+dependent on code is called recording the expectations.</p>
+<p>In the test above the we expect <code>gpio_init()</code> to be called exactly
+once, with a single unsigned integer argument of 15.</p>
+<p>Finally the test will call the <code>app_main()</code> function which is supposed to
+invoke <code>gpio_init()</code></p>
+<p>Since there are no GPIO pins to configure on the development workstation
+(host target), we must mock the actual call to the <code>gpio_init()</code>
+function. Since we test C code from the C++ framework (CppUTest), the
+syntax will vary slightly.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">gpio_init</span>(uint pinNum){
+</span></span><span style="display:flex;"><span>  mock_c()<span style="color:#f92672">-&gt;</span>actualCall(<span style="color:#e6db74">&#34;gpio_init&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">-&gt;</span>withUnsignedIntParameters(<span style="color:#e6db74">&#34;pinNum&#34;</span>, pinNum);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Once the test is written we&rsquo;ll complete the RED phase of TDD cycle
+by compiling and running a failing test.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>cmake -B build_host -DPICO_PLATFORM<span style="color:#f92672">=</span>host
+</span></span><span style="display:flex;"><span>cmake --build build_host/ -t appTestRunner
+</span></span><span style="display:flex;"><span>./build_host/test/appTestRunner 
+</span></span></code></pre></div><p>The first command will initialize CMake build system for the host
+(dev laptop) target, if not already done so. The second command will
+perform the build of the test runner binary
+(aka <code>appTestRunner</code> CMake target). The last command will run the
+<code>appTestRunner</code> binary.</p>
+<p>The results should look like the screenshot below:</p>
+<p><a href="gpio_init_failing_test.png">failing test</a></p>
+<h3 id="gpio-initialization-implementation-green">GPIO Initialization Implementation (GREEN)</h3>
+<p>Check out <code>gpio_init_minimal_impl</code> branch if following along.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>git checkout gpio_init_minimal_impl
+</span></span></code></pre></div><p>Once we have a failing test that properly compiles and runs it&rsquo;s
+Time to write the simplest <code>app_main()</code> implementation needed
+to pass the test.</p>
+<p>App.c</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C" data-lang="C"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">app_main</span>(<span style="color:#66d9ef">void</span>){
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">gpio_init</span>(<span style="color:#ae81ff">15</span>); 
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">//TODO blink;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div><p>Then recompile and rerun the tests.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>cmake --build build_host/ -t appTestRunner
+</span></span><span style="display:flex;"><span>./build_host/test/appTestRunner 
+</span></span></code></pre></div><p>The results should look as follows:</p>
+<p><a href="gpio_init_failing_test.png">passing test</a></p>
+<h3 id="clean-up-refactor">Clean Up (REFACTOR)</h3>
+<p>Check out <code>gpio_init_refactor</code> branch if following along.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>git checkout gpio_init_refactor
+</span></span></code></pre></div><p>While looking at the minimal implementation of <code>app_main()</code> one may
+note that there is a magic number, hiding in it. Once the
+tests are passing and code under test behaves as expected, it is
+time to clean up. The is the exact purpose of the REFACTOR phase
+of the TDD. Since the GPIO number is not going to change over the
+course of the program execution, it makes sense to replace it
+with a macro defined in <code>App.h</code>.  Of course any code modification
+will be followed by rebuilding and rerunning of the tests to
+ensure that the code under test still behaves as expected.</p>
+<p>If you are following along, see the code changes by running the
+Following command:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>git diff 62fedd3455f7eef3a0c45e9d4dca89c976812463
+</span></span></code></pre></div><p>The results should look as follows:</p>
+<p><a href="gpio_init_refactor_diff.png">refactor diff</a></p>
+<p>This is TDD with Pico C/C++ SDK in a nutshell. The test harness
+(CppUTest) provides a safety net for refactoring the code,
+while ensuring that the changes did not break anything.
+However, refactoring does not mean changing functionality or
+adding features.</p>
+<p>But wait&hellip; you can&rsquo;t blink an LED with what we have so far&hellip;</p>
+<p>More to follow&hellip;</p>
+<p>PS if you are impatient see <code>blog_blink</code> branch.</p>
+
+  
+  <div>
+    <div>Tags:</div>
+    <ul>
+        <li><a href="/tags/c/">C</a></li>
+        <li><a href="/tags/embedded/">Embedded</a></li>
+        <li><a href="/tags/coding/">Coding</a></li>
+        <li><a href="/tags/tdd/">Tdd</a></li>
+        <li><a href="/tags/cmake/">Cmake</a></li>
+    </ul>
+  </div>
+
+
+  </main>
+  <footer>
+    <p>Copyright 2026. All rights reserved.</p>
+
+  </footer>
+</body>
+</html>

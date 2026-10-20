@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Devops on Vlads Tech</title>
-    <link>//localhost:8080/tags/devops/</link>
-    <description>Recent content in Devops on Vlads Tech</description>
+    <title>Devops on Vlad&#39;s Tech</title>
+    <link>/tags/devops/</link>
+    <description>Recent content in Devops on Vlad&#39;s Tech</description>
     <generator>Hugo</generator>
     <language>en-US</language>
     <lastBuildDate>Thu, 19 Jun 2025 00:00:00 +0000</lastBuildDate>
-    <atom:link href="//localhost:8080/tags/devops/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="/tags/devops/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Automating Rocky Linux VM Provisioning with Ansible on KVM Hypervisor</title>
-      <link>//localhost:8080/devops/automating-rockylinux-provisioning-on-kvm/</link>
+      <link>/devops/automating-rockylinux-provisioning-on-kvm/</link>
       <pubDate>Thu, 19 Jun 2025 00:00:00 +0000</pubDate>
-      <guid>//localhost:8080/devops/automating-rockylinux-provisioning-on-kvm/</guid>
+      <guid>/devops/automating-rockylinux-provisioning-on-kvm/</guid>
       <description>&lt;h2 id=&#34;intro&#34;&gt;Intro&lt;/h2&gt;&#xA;&lt;p&gt;I absolutely love KVM hypervisor! It&amp;rsquo;s free and has a great CLI interface&#xA;which makes it easier to automate things.&lt;/p&gt;&#xA;&lt;p&gt;It also comes with a very powerful &lt;code&gt;virt-install&lt;/code&gt; utility,&#xA;which eliminates the need to use third-party tools like Packer.&lt;/p&gt;&#xA;&lt;p&gt;When combined with tools like Ansible and kickstart, &lt;code&gt;virt-install&lt;/code&gt; makes&#xA;VM provisioning a breeze.&lt;/p&gt;&#xA;&lt;h2 id=&#34;gotchas-to-keep-in-mind&#34;&gt;Gotchas to Keep in Mind&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;Keep in mind the qemu connection type and current user group memberships.&#xA;A user must be a member of &lt;code&gt;libvirt&lt;/code&gt; group in order to leverage system&#xA;connections without root privileges.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Into the .deb: What am I Installing?</title>
-      <link>//localhost:8080/devops/into-dot-deb-what-am-i-installing/</link>
+      <link>/devops/into-dot-deb-what-am-i-installing/</link>
       <pubDate>Tue, 17 Jun 2025 00:00:00 +0000</pubDate>
-      <guid>//localhost:8080/devops/into-dot-deb-what-am-i-installing/</guid>
+      <guid>/devops/into-dot-deb-what-am-i-installing/</guid>
       <description>&lt;p&gt;So there I was, trying to install Nvidia drivers on my old homelab desktop.  As you would expect from a reasonable engineer, I started with doing a bit of good ole RTFM (read the field manual; or do you due diligence and look at the documentation).&lt;/p&gt;&#xA;&lt;p&gt;Generally, vendor documentation is a good place to start, however, looking at Nvidia Cuda Quick start Guide I saw this:&lt;/p&gt;&#xA;&lt;p&gt;&lt;img src=&#34;nvidia_install_instructions.png&#34; alt=&#34;Nvidia driver isntall instructions&#34;&gt;&lt;/p&gt;</description>
     </item>
   </channel>
