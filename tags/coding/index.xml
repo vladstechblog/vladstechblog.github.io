@@ -1,25 +1,39 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Coding on Vlads Tech</title>
-    <link>//localhost:8080/tags/coding/</link>
-    <description>Recent content in Coding on Vlads Tech</description>
+    <title>Coding on Vlad&#39;s Tech</title>
+    <link>/tags/coding/</link>
+    <description>Recent content in Coding on Vlad&#39;s Tech</description>
     <generator>Hugo</generator>
     <language>en-US</language>
-    <lastBuildDate>Tue, 17 Jun 2025 00:00:00 +0000</lastBuildDate>
-    <atom:link href="//localhost:8080/tags/coding/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 19 Oct 2026 00:00:00 +0000</lastBuildDate>
+    <atom:link href="/tags/coding/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Wrangling Two Monsters Part II: TDD with PICO C/C&#43;&#43; SDK in a Nutshell</title>
+      <link>/trad-dev-posts/wrangling-two-monsters-part-2/</link>
+      <pubDate>Mon, 19 Oct 2026 00:00:00 +0000</pubDate>
+      <guid>/trad-dev-posts/wrangling-two-monsters-part-2/</guid>
+      <description>&lt;h2 id=&#34;intro&#34;&gt;Intro&lt;/h2&gt;&#xA;&lt;p&gt;In part I, we&amp;rsquo;ve addressed the first monter, setting up a CMake project&#xA;for TDD with Pico C/C++ SDK. This article will attempt to wrangle the&#xA;second monster, the PICO C/C++ SDK itself&lt;/p&gt;&#xA;&lt;h2 id=&#34;tdd-setup-overview&#34;&gt;TDD Setup Overview&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;terms:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;code&gt;host build&lt;/code&gt;: code compiler for your development architecture&#xA;(Your dev laptop)&lt;/li&gt;&#xA;&lt;li&gt;&lt;code&gt;target build&lt;/code&gt;: code compiler for the Pico board&lt;/li&gt;&#xA;&lt;li&gt;&lt;code&gt;target&lt;/code&gt;: generic reference for which platform the project is built&lt;/li&gt;&#xA;&lt;li&gt;&lt;code&gt;CMake target&lt;/code&gt; (for the purpose of this article): an item which will&#xA;be produced by CMake build system&lt;/li&gt;&#xA;&lt;li&gt;&lt;code&gt;listfile&lt;/code&gt;: file containing CMake language&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;All development will be done in a Debian container&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Wrangling Two Monsters Part I: CMake and Pico C/C&#43;&#43; SDK Setup for TDD</title>
+      <link>/trad-dev-posts/wrangling-two-monsters-part-1/</link>
+      <pubDate>Sun, 18 Oct 2026 00:00:00 +0000</pubDate>
+      <guid>/trad-dev-posts/wrangling-two-monsters-part-1/</guid>
+      <description>&lt;h2 id=&#34;intro&#34;&gt;Intro&lt;/h2&gt;&#xA;&lt;p&gt;Embedded world is a tedious place. The best way to navigate it while keeping&#xA;your sanity is through the practice of Test Driven Development (TDD).&lt;/p&gt;&#xA;&lt;p&gt;Being a bit blunt, Pico C/C++ SDK is a monstrosity&#xA;(huge codebase with nested projects) managed by another monstrosity (CMake).&lt;/p&gt;&#xA;&lt;p&gt;Nevertheless, both can be dealt with by using the popular strategy of&#xA;&amp;ldquo;How to eat an elephant&amp;rdquo; - one small piece at a time.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>My MacDventure Part 1: Setting Up Container-based C/C&#43;&#43; development Environment</title>
-      <link>//localhost:8080/posts/cpp-container-dev-environment/</link>
+      <link>/trad-dev-posts/cpp-container-dev-environment/</link>
       <pubDate>Tue, 17 Jun 2025 00:00:00 +0000</pubDate>
-      <guid>//localhost:8080/posts/cpp-container-dev-environment/</guid>
+      <guid>/trad-dev-posts/cpp-container-dev-environment/</guid>
       <description>&lt;p&gt;So there I was, with the gift of a brand new MacBook Air. Over the past&lt;br&gt;&#xA;decade and a half, my primary daily drivers have ALL been Linux.&lt;/p&gt;&#xA;&lt;p&gt;However, recently I decided to try something new. That something new&lt;br&gt;&#xA;involved getting a MacBook Air.&lt;/p&gt;&#xA;&lt;p&gt;I&amp;rsquo;ve been looking for a good coding platform, and most of the professional&lt;br&gt;&#xA;software engineers I know RAVE about how great Macs are. Well, Macs are&lt;br&gt;&#xA;Unix after all, and Unix is very similar to Linux. Therefore, I should be&lt;br&gt;&#xA;right at home. What could go wrong? Right????&lt;/p&gt;</description>
     </item>
     <item>
       <title>Oh My: Maintainable = Testable &#43; Understandable</title>
-      <link>//localhost:8080/ramblings/tdd/</link>
+      <link>/ramblings/tdd/</link>
       <pubDate>Tue, 17 Jun 2025 00:00:00 +0000</pubDate>
-      <guid>//localhost:8080/ramblings/tdd/</guid>
+      <guid>/ramblings/tdd/</guid>
       <description>&lt;p&gt;So there you were…  Palms sweaty, highly caffeinated, and ready to solve worlds problems with code.  You have a brilliant idea that will solve this tough problem, however, it requires modifying existing code base.  With plenty of creative freedom given by your boss, you embark on the journey of implementing this idea and bravely “improving” the existing code base.  You’re finally done and and excited to see your great idea come to life.&lt;/p&gt;</description>
     </item>
   </channel>

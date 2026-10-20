@@ -2,88 +2,90 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>//localhost:8080/about/</loc>
+    <loc>/tags/c/</loc>
+    <lastmod>2026-10-19T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/tags/cmake/</loc>
+    <lastmod>2026-10-19T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/tags/coding/</loc>
+    <lastmod>2026-10-19T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/tags/embedded/</loc>
+    <lastmod>2026-10-19T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/tags/</loc>
+    <lastmod>2026-10-19T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/tags/tdd/</loc>
+    <lastmod>2026-10-19T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/trad-dev-posts/</loc>
+    <lastmod>2026-10-19T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/</loc>
+    <lastmod>2026-10-19T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/trad-dev-posts/wrangling-two-monsters-part-2/</loc>
+    <lastmod>2026-10-19T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/trad-dev-posts/wrangling-two-monsters-part-1/</loc>
+    <lastmod>2026-10-18T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/about/</loc>
     <lastmod>2025-07-16T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:8080/</loc>
-    <lastmod>2025-07-16T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>//localhost:8080/tags/macdventure/</loc>
+    <loc>/tags/macdventure/</loc>
     <lastmod>2025-07-15T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:8080/posts/burning-isos-on-a-mac/</loc>
+    <loc>/trad-dev-posts/burning-isos-on-a-mac/</loc>
     <lastmod>2025-07-15T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:8080/posts/</loc>
-    <lastmod>2025-07-15T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>//localhost:8080/tags/</loc>
-    <lastmod>2025-07-15T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>//localhost:8080/devops/automating-rockylinux-provisioning-on-kvm/</loc>
+    <loc>/devops/automating-rockylinux-provisioning-on-kvm/</loc>
     <lastmod>2025-06-19T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:8080/devops/</loc>
+    <loc>/devops/</loc>
     <lastmod>2025-06-19T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:8080/tags/devops/</loc>
+    <loc>/tags/devops/</loc>
     <lastmod>2025-06-19T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:8080/tags/coding/</loc>
+    <loc>/tags/cybersecurity/</loc>
     <lastmod>2025-06-17T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:8080/tags/cybersecurity/</loc>
+    <loc>/dad-joke-originals/</loc>
     <lastmod>2025-06-17T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:8080/dad-joke-originals/</loc>
+    <loc>/tags/humor/</loc>
     <lastmod>2025-06-17T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:8080/tags/humor/</loc>
+    <loc>/devops/into-dot-deb-what-am-i-installing/</loc>
     <lastmod>2025-06-17T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:8080/devops/into-dot-deb-what-am-i-installing/</loc>
+    <loc>/trad-dev-posts/cpp-container-dev-environment/</loc>
     <lastmod>2025-06-17T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:8080/posts/cpp-container-dev-environment/</loc>
+    <loc>/ramblings/tdd/</loc>
     <lastmod>2025-06-17T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:8080/ramblings/tdd/</loc>
+    <loc>/ramblings/</loc>
     <lastmod>2025-06-17T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:8080/ramblings/</loc>
+    <loc>/tags/software-validation/</loc>
     <lastmod>2025-06-17T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:8080/tags/software-validation/</loc>
-    <lastmod>2025-06-17T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>//localhost:8080/tags/tdd/</loc>
-    <lastmod>2025-06-17T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>//localhost:8080/posts/dont-bow-to-the-stig/</loc>
+    <loc>/posts/dont-bow-to-the-stig/</loc>
     <lastmod>2024-05-08T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:8080/tags/stig/</loc>
+    <loc>/posts/</loc>
     <lastmod>2024-05-08T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:8080/tags/system-hardening/</loc>
+    <loc>/tags/stig/</loc>
     <lastmod>2024-05-08T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:8080/automation/ansible/ansible_notables/</loc>
+    <loc>/tags/system-hardening/</loc>
+    <lastmod>2024-05-08T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:8080/automation/ansible/molecule/</loc>
-  </url><url>
-    <loc>//localhost:8080/devops/working-with-rocky-containers-airgapped/</loc>
-  </url><url>
-    <loc>//localhost:8080/mind-the-gap/a-case-for-air-gap/</loc>
-  </url><url>
-    <loc>//localhost:8080/workflow_optimization/tmux/</loc>
-  </url><url>
-    <loc>//localhost:8080/automation/</loc>
-  </url><url>
-    <loc>//localhost:8080/categories/</loc>
-  </url><url>
-    <loc>//localhost:8080/mind-the-gap/</loc>
-  </url><url>
-    <loc>//localhost:8080/workflow_optimization/</loc>
+    <loc>/categories/</loc>
   </url>
 </urlset>

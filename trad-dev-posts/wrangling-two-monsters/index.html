@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=8080&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>Wrangling Two Monsters Part I: CMake and Pico C/C&#43;&#43; SDK Setup for TDD | Vlad&#39;s Tech</title>
+
+    <link rel="stylesheet" href="/css/main.css">
+
+
+      <script src="/js/main.js"></script>
+
+
+</head>
+<body>
+  <header>
+    <div class="h1-logo">
+    <img src="/white_logo.svg"/>
+</div>
+
+<nav class="main-nav">
+    <a href="/">HOME</a>
+    <a href="/about">About</a>
+    <a href="/trad-dev-posts">Trad Dev Posts</a>
+    <a href="/tags">Tags</a>
+</nav>
+
+
+
+
+  </header>
+  <main>
+    
+  <h1>Wrangling Two Monsters Part I: CMake and Pico C/C&#43;&#43; SDK Setup for TDD</h1>
+
+  
+  
+  <time datetime="2026-10-18T00:00:00&#43;00:00">October 18, 2026</time>
+
+  <h2 id="intro">Intro</h2>
+<p>Embedded world is a tedious place. The best way to navigate it while keeping
+your sanity is through the practice of Test Driven Development (TDD).</p>
+<p>Being a bit blunt, Pico C/C++ SDK is a monstrosity
+(huge codebase with nested projects) managed by another monstrosity (CMake).</p>
+<p>Nevertheless, both can be dealt with by using the popular strategy of
+&ldquo;How to eat an elephant&rdquo; - one small piece at a time.</p>
+<h2 id="tdd-setup-overview">TDD Setup Overview</h2>
+<ul>
+<li>
+<p>terms:</p>
+<ul>
+<li><code>host build</code>: code compiler for your development architecture
+(Your dev laptop)</li>
+<li><code>target build</code>: code compiler for the Pico board</li>
+<li><code>target</code>: generic reference for which platform the project is built</li>
+<li><code>CMake target</code> (for the purpose of this article): an item which will
+be produced by CMake build system</li>
+<li><code>listfile</code>: file containing CMake language</li>
+</ul>
+</li>
+<li>
+<p>All development will be done in a Debian container</p>
+<ul>
+<li>with a local development directory mounted into <code>/home/developer</code> inside
+the container (aka <code>~/</code>)</li>
+</ul>
+</li>
+<li>
+<p>all pico-related GitHub repos are located in <code>~/pico</code>, inside the development
+container and their corresponding environment variables are set as per this
+<a href="https://github.com/raspberrypi/pico-setup/blob/master/pico_setup.sh">script</a></p>
+</li>
+<li>
+<p>TDD will be conducted on the host build.
+<code>cmake -B build_host -DPICO_PLATFORM=host -DPICO_NO_PICOTOOL=True -DCMAKE_BUILD_TYPE=Debug</code></p>
+</li>
+<li>
+<p>CppUTest repo will be located in the <code>/home/developer/cpputest</code></p>
+</li>
+<li>
+<p>board specifics will be skipped in order to reduce an already dense material.</p>
+</li>
+</ul>
+<h2 id="tdd-considerations-and-trade-offs">TDD Considerations and Trade-Offs</h2>
+<p>The Pico C/C++ SDK is a mess of nested CMake-managed projects/directories.
+The scary nature of this monster does not start to manifest until
+you have to compile your first unit test. It tends to sneak up
+during inclusion of Pico-specific headers.</p>
+<p>Most of the mess is caused by endless transient dependencies,
+and the differences in available headers between host and target builds.
+(The host builds will be missing a bunch of board-specific headers).</p>
+<p>The root cause for this mess lies in CMake&rsquo;s invocation of
+<code>pico_skd_init()</code>, and it&rsquo;s seemingly endless recursive invocation of
+other CMake files within the Pico C/C++ SDK that check for all kinds of
+variables while making decision of what will be included based
+on the specified target (host or a specific board).
+Ultimately Pico C/C++ SDK developers did not seem to expect their users
+to conduct TDD and therefore did not deem it necessary to make
+hardware specific headers available for host builds.</p>
+<p>Refactoring the entire PICO C/C++ SDK in an attempt to fix the
+CMake nightmare produced by it&rsquo;s developers is not worth wasting your
+brain cycles.</p>
+<p>A reasonable way to address this is to strike a balance between
+using the actual headers (when possible), and mocking just enough
+dependencies for the tests to pass in order to lock in the expected
+&ldquo;production&rdquo; code behavior. More on that in another article.</p>
+<h2 id="wrangling-your-very-own-cmake-monster">Wrangling Your Very Own CMake Monster</h2>
+<p>Whatever your love/hate/both relationship with CMake is, at a minimum,
+CMake can be extremely useful (maybe even liked a little :P) if one keeps
+things organized.</p>
+<p>The key factors to success:</p>
+<ul>
+<li>keep project stucture organized, and logically separate</li>
+<li>keep CMake listfiles reasonably small (one per subdirectory)</li>
+<li>factor out trivial CMake items into their own list files and include
+them where needed</li>
+<li>keep your code modular (compiling it into static libraries is a reasonable
+choice)</li>
+<li>be mindful of what you are linking against headers only vs actual pico
+libraries. For example: <code>pico_stdlib_headers</code> vs <code>pico_stdlib</code>.</li>
+<li>always try to minimize board specific dependencies</li>
+</ul>
+<p>Here is an example of the project, which can be cloned as follows</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>git clone https://github.com/vladstechblog/pico_blink_tdd.git -b pico_tcc_cmake_setup
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plaintext" data-lang="plaintext"><span style="display:flex;"><span>|-- CMakeLists.txt &lt;= project root listfile
+</span></span><span style="display:flex;"><span>|-- include_pico_init.cmake &lt;= factored out import of pico SDK
+</span></span><span style="display:flex;"><span>|-- src
+</span></span><span style="display:flex;"><span>|   |-- CMakeLists.txt &lt;= listfile responsible of building the app
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>`-- test
+</span></span><span style="display:flex;"><span>    |-- CMakeLists.txt &lt;= list file responsible for building unit tests
+</span></span><span style="display:flex;"><span>    `-- include_local_cpputest_git_repo.cmake &lt;= listfile which includes CppUTest
+</span></span></code></pre></div><h3 id="key-cmake-project-structure-takeaways">Key CMake Project Structure Takeaways</h3>
+<p>There is single root project listfile. Its purpose is to intialize the project,
+and delegate the build actions the appropriate listfiles contained in the
+<code>src</code> and <code>test</code> subdirectories.  Note the that PICO SDK initialization
+is a part of the project initialization process, as it configures the compiler
+toolchain specific to the target (host/board) build.</p>
+<p>Actions not directly related to the build process are factored out into
+their own listfiles. A good candidates for those are mundane things related
+to dependency imports, such as validating that dependency directory, or
+A dependency listfile exists, etc&hellip; Factoring out trivial work will help
+to keep the project listfiles focused and maintainable (largest listfile
+is 19 lines long)</p>
+<p>Note the separation of concerns:</p>
+<ul>
+<li>PICO SDK import is factored out into <code>include_pico_init.cmake</code></li>
+<li>core application source code build is delegated to the listfile in <code>src</code></li>
+<li>unit test build is dedicate to the listfile in <code>test</code></li>
+<li>CppUTest import is factored out into <code>include_local_cpputest_git_repo.cmake</code></li>
+<li>in more complex projects, each software component in the <code>src</code> directory
+should have it&rsquo;s own dedicated CMake listfile</li>
+<li>source code builds are separated from test builds</li>
+<li>test builds are excluded from automatic core source codes builds</li>
+</ul>
+<h3 id="quick-test-build-walkthrough">Quick Test Build Walkthrough</h3>
+<ol>
+<li>Clone the the project as starting point and cd into project directory</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>git clone https://github.com/vladstechblog/pico_blink_tdd.git -b pico_tcc_cmake_setup
+</span></span><span style="display:flex;"><span>cd pico_blink_tdd
+</span></span></code></pre></div><ol>
+<li>Initialize project for host builds</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>cmake -B build_host -DPICO_PLATFORM<span style="color:#f92672">=</span>host
+</span></span></code></pre></div><ol>
+<li>Built and run the test target</li>
+</ol>
+<pre tabindex="0"><code>cmake --build build_host/ -t appTestRunner
+</code></pre><ol>
+<li>Run the test runner binary</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>./build_host/test/appTestRunner
+</span></span></code></pre></div><ol>
+<li>Add code, rebuild and re-run the tests</li>
+</ol>
+<p>The instructions above are a bit contrived. The actual blink TDD example will
+be covered in the next article.</p>
+
+  
+  <div>
+    <div>Tags:</div>
+    <ul>
+        <li><a href="/tags/c/">C</a></li>
+        <li><a href="/tags/embedded/">Embedded</a></li>
+        <li><a href="/tags/coding/">Coding</a></li>
+        <li><a href="/tags/tdd/">Tdd</a></li>
+        <li><a href="/tags/cmake/">Cmake</a></li>
+    </ul>
+  </div>
+
+
+  </main>
+  <footer>
+    <p>Copyright 2026. All rights reserved.</p>
+
+  </footer>
+</body>
+</html>
