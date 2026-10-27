@@ -38,7 +38,7 @@
   <time datetime="2026-10-19T00:00:00&#43;00:00">October 19, 2026</time>
 
   <h2 id="intro">Intro</h2>
-<p>In part I, we&rsquo;ve addressed the first monter, setting up a CMake project
+<p>In part I, we&rsquo;ve addressed the first monster, setting up a CMake project
 for TDD with Pico C/C++ SDK. This article will attempt to wrangle the
 second monster, the PICO C/C++ SDK itself</p>
 <h2 id="tdd-setup-overview">TDD Setup Overview</h2>
@@ -46,9 +46,9 @@ second monster, the PICO C/C++ SDK itself</p>
 <li>
 <p>terms:</p>
 <ul>
-<li><code>host build</code>: code compiler for your development architecture
+<li><code>host build</code>: code compiled for your development architecture
 (Your dev laptop)</li>
-<li><code>target build</code>: code compiler for the Pico board</li>
+<li><code>target build</code>: code compiled for the Pico board</li>
 <li><code>target</code>: generic reference for which platform the project is built</li>
 <li><code>CMake target</code> (for the purpose of this article): an item which will
 be produced by CMake build system</li>
@@ -88,20 +88,20 @@ a failing test is written before the production code. Then just enough
 production code is written for the test to pass, followed by
 clean up/refactoring. This development cycle is called
 RED/GREEN/REFACTOR. The description above is an oversimplification
-of the process, but it will server it&rsquo;s purpose for this article.</p>
+of the process, but it will serve it&rsquo;s purpose for this article.</p>
 <h2 id="a-short-tdd-example">A Short TDD Example</h2>
-<p>As per Pico C/C++ SDK examples, before Pico board can blink an LED,
+<p>As in the Pico C/C++ SDK examples, before a Pico board can blink an LED,
 a basic pin setup must be performed. First a GPIO pin must be selected
 (initialized) for the task. Second, the same pin must be configured
 as an output pin.</p>
 <h3 id="gpio-initialization-test-red">GPIO Initialization Test (RED)</h3>
 <p>Check out <code>gpio_init_test</code> branch if you are following along:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>git checkout gpio_init_test
-</span></span></code></pre></div><p>Let&rsquo;s start simple.  In order to keep the code modular and therefore
-testable lets move the application source code in <code>src/app.c</code> and
-Corresponding headers to <code>src/include/app.h</code>.  The program entry point
-will be <code>app_main()</code> defined in the src/App.c file. It will,
-in turn, setup GPIO pins, and later perform the blinking.</p>
+</span></span></code></pre></div><p>We&rsquo;ll start simple.  In order to keep the code modular (and therefore
+testable) let&rsquo;s move the application source code in <code>src/app.c</code> and
+corresponding headers to <code>src/include/app.h</code>.  The program entry point
+will be <code>app_main()</code> defined in the src/App.c file. It will setup GPIO pins,
+and later perform the blinking.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C" data-lang="C"><span style="display:flex;"><span><span style="color:#75715e">//App.c:
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
 </span></span><span style="display:flex;"><span>Void <span style="color:#a6e22e">app_main</span>(){
@@ -113,7 +113,7 @@ a failing test which expects <code>app_main()</code> to call <code>gpio_init()</
 The correct parameters.</p>
 <p>First we&rsquo;ll create a test group which will manage the desired state
 for our tests.  For now it will be limited only to cleanup and expectation
-checks performed by the <code>teardown()</code> method.</p>
+checks, performed by the <code>teardown()</code> method.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span>TEST_GROUP(App)
 </span></span><span style="display:flex;"><span>{
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">setup</span>(){
@@ -125,7 +125,7 @@ checks performed by the <code>teardown()</code> method.</p>
 </span></span><span style="display:flex;"><span>      mock().clear();;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};
-</span></span></code></pre></div><p>With <code>App</code> test group setup up, the first test <code>CallsGPIOInitWithCorrectArguments</code>
+</span></span></code></pre></div><p>With <code>App</code> test group set up, the first test <code>CallsGPIOInitWithCorrectArguments</code>
 will look like this:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span>TEST(App, CallsGPIOInitWithCorrectArguments){
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">int</span> led_pin <span style="color:#f92672">=</span> <span style="color:#ae81ff">15</span>;
@@ -140,37 +140,38 @@ will look like this:</p>
 impossible to test against a collaborator directly, in which case
 those dependencies must be substituted while allowing to validate
 the behavior of code under test (CUT).</p>
-<p>In the test above, we will use CppUTest Mock framework. Mock frameworks
+<p>In the test above, we will use CppUTest&rsquo;s Mock framework. Mock frameworks
 allow to validate that code under test will invoke dependent on code (DOC)
 a specific amount of times, in a specific order, with specific arguments.</p>
-<p>Outlining the exact way that the code under test must invoke the
-dependent on code is called recording the expectations.</p>
-<p>In the test above the we expect <code>gpio_init()</code> to be called exactly
+<p>Outlining the exact way that the CUT must invoke the DOC is called
+&ldquo;recording the expectations&rdquo;.</p>
+<p>In the test above we expect <code>gpio_init()</code> to be called exactly
 once, with a single unsigned integer argument of 15.</p>
 <p>The last part of the test will call the <code>app_main()</code> function which is
 responsible for selecting the correct GPIO pin by calling <code>gpio_init()</code>.</p>
 <p>Since there are no GPIO pins to configure on the development workstation
 (host target), we must mock the actual call to the <code>gpio_init()</code>
-function. Since we test C code from the C++ framework (CppUTest), the
-syntax will vary slightly.</p>
+function.</p>
+<p>The invocation syntax will vary slightly due to testing C code from the
+C++ framework (CppUTest).</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">gpio_init</span>(uint pinNum){
 </span></span><span style="display:flex;"><span>  mock_c()<span style="color:#f92672">-&gt;</span>actualCall(<span style="color:#e6db74">&#34;gpio_init&#34;</span>)
 </span></span><span style="display:flex;"><span>    <span style="color:#f92672">-&gt;</span>withUnsignedIntParameters(<span style="color:#e6db74">&#34;pinNum&#34;</span>, pinNum);
 </span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>Once the test is written we&rsquo;ll complete the RED phase of TDD cycle
+</span></span></code></pre></div><p>Once the test is written, we&rsquo;ll complete the RED phase of TDD cycle
 by compiling and running a failing test.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>cmake -B build_host -DPICO_PLATFORM<span style="color:#f92672">=</span>host
 </span></span><span style="display:flex;"><span>cmake --build build_host/ -t appTestRunner
 </span></span><span style="display:flex;"><span>./build_host/test/appTestRunner 
 </span></span></code></pre></div><p>The first command will initialize CMake build system for the host
-(dev laptop) target, if not already done so. The second command will
-perform the build of the test runner binary and the code under test
+(dev workstation) target. The second command will perform the build
+of the test runner binary and the code under test
 (<code>appTestRunner</code> CMake target). The last command will run the
 <code>appTestRunner</code> binary.</p>
 <p>The results should look like the screenshot below:</p>
-<p><img src="gpio_init_failing.png" alt="failing test"></p>
+<p><img src="gpio_init_failing_test.png" alt="failing test"></p>
 <h3 id="gpio-initialization-implementation-green">GPIO Initialization Implementation (GREEN)</h3>
-<p>Check out <code>gpio_init_minimal_impl</code> branch if following along.</p>
+<p>If following along, check out <code>gpio_init_minimal_impl</code> branch.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>git checkout gpio_init_minimal_impl
 </span></span></code></pre></div><p>Once we have a failing test that properly compiles and runs, it is
 time to write the simplest <code>app_main()</code> implementation needed
@@ -191,7 +192,7 @@ to pass the test.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>git checkout gpio_init_refactor
 </span></span></code></pre></div><p>While looking at the minimal implementation of <code>app_main()</code> one may
 note that there is a magic number hiding in it. Once the
-tests are passing and code under test behaves as expected it is
+tests are passing and the code under test behaves as expected, it is
 time to clean up. This is the exact purpose of the REFACTOR phase
 of the TDD cycle. Since the GPIO number is not going to change over the
 course of the program execution, it makes sense to replace it
